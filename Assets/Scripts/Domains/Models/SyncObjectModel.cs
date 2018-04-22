@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PositionModel : MonoBehaviour {
+public class SyncObjectModel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
