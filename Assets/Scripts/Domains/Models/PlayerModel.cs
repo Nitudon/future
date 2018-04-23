@@ -1,16 +1,30 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UdonLib.Commons;
 using UnityEngine;
+using UniRx;
 
-public class PlayerModel : MonoBehaviour {
+/// <summary>
+/// プレイヤーのモデル
+/// </summary>
+public class PlayerModel : UdonBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private FloatReactiveProperty _playerHp;
+    public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
+
+    private ReactiveProperty<Vector3> _playerPosition;
+    public IReadOnlyReactiveProperty<Vector3> PlayerPosition => _playerPosition;
+
+    public void SyncPosition()
+    {
+        MainThreadDispatcher.StartUpdateMicroCoroutine(UpdateCoroutine());
+    }
+
+    private IEnumerator UpdateCoroutine()
+    {
+        while(true)
+        {
+            _playerPosition.Value = transform.position;
+            yield return null;
+        }
+    }
 }
