@@ -1,0 +1,6 @@
+[submodule "Assets/Submodules"]
+	path = Assets/Submodules
+	url = https://github.com/Nitudon/UdonLib.git
+[submodule "UdonLib"]
+	path = UdonLib
+	url = https://github.com/Nitudon/UdonLib.git
