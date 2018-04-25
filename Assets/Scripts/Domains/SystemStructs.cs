@@ -6,6 +6,8 @@
     public struct RoomData{
         public int RoomId;
 
+        public UserData[] Users;
+
         public UnityEngine.Vector3 RoomRoot;
 
         public float TotalGameTime;
@@ -17,8 +19,6 @@
     /// ユーザー情報、ゲーム内パラメータやシステム上のユーザーパラメータ
     /// </summary>
     public struct UserData{
-        // 属するルーム
-        public RoomData Room;
         // ユーザーの識別ID
         public int UserId;
         // ユーザーの表示名
