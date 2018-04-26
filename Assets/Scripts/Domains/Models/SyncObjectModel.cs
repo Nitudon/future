@@ -14,7 +14,7 @@ public class SyncObjectModel : MonoBehaviour {
     public bool IsMine => _isMine;
 
     public static SyncObjectModel CreateSyncObject(){
-        var model = Instantiate<SyncObjectModel>(new SyncObjectModel);
+        var model = Instantiate<SyncObjectModel>(new SyncObjectModel());
 
         model._isMine = false;
 
