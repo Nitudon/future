@@ -9,6 +9,8 @@ public class Client{
     private WebSocket _connection;
     public WebSocket Connection => _connection;
 
+    public System.Action<object, MessageEventArgs> OnReceiveMessageListener;
+
     public Client(){
         _connection = new WebSocket(ConnectionParameters.WS_CONNECTIONADDRESS);
     }
@@ -23,25 +25,7 @@ public class Client{
             return;
         }
 
-        _connection.OnOpen += (sender, e) =>
-        {
-            InstantLog.StringLog("Websocket Open", StringExtensions.TextColor.cyan);
-        };
-
-        _connection.OnMessage += (sender, e) =>
-        {
-            InstantLog.StringLog("WebSocket Send Message : " +  e.Data, StringExtensions.TextColor.green);
-        };
-
-        _connection.OnError += (sender, e) =>
-        {
-            InstantLog.StringLog("Websocket Error", StringExtensions.TextColor.red);
-        };
-
-        _connection.OnClose += (sender, e) =>
-        {
-            InstantLog.StringLog($"Websocket E", StringExtensions.TextColor.magenta);
-        };
+        HandleFunc();
 
         _connection.Connect();
     }
@@ -61,6 +45,31 @@ public class Client{
 
     public void SendJson(string message){
         SendMessage(JsonUtility.ToJson(message));
+    }
+
+    private void HandleFunc()
+    {
+        _connection.OnOpen += (sender, e) =>
+        {
+            InstantLog.StringLog("Websocket Open", StringExtensions.TextColor.cyan);
+        };
+
+        _connection.OnError += (sender, e) =>
+        {
+            InstantLog.StringLog("Websocket Error", StringExtensions.TextColor.red);
+        };
+
+        _connection.OnClose += (sender, e) =>
+        {
+            InstantLog.StringLog("Websocket Close", StringExtensions.TextColor.magenta);
+        };
+
+        _connection.OnMessage += ReceiveMessageHandle;
+    }
+
+    private void ReceiveMessageHandle(object sender, MessageEventArgs e)
+    {
+        OnReceiveMessageListener?.Invoke(sender, e);
     }
 
 }
