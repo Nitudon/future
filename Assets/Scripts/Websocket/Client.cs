@@ -38,8 +38,6 @@ public class Client{
             return;
         }
 
-        message = JsonUtility.ToJson(message);
-
         _connection.Send(message);
     }
 
