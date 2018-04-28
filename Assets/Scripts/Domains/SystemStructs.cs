@@ -6,9 +6,9 @@
     public struct RoomData{
         public int RoomId;
 
-        public UserData[] Users;
+        public int MasterUserId;
 
-        public UnityEngine.Vector3 RoomRoot;
+        public UserData[] Users;
 
         public float TotalGameTime;
 
