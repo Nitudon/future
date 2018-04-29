@@ -19,7 +19,7 @@ public class RoomModel : UdonBehaviour{
 	public void Initialize(RoomData data){
         RoomSetting = data;
 
-        _players = RoomSetting.Users.Select()
+        _players = RoomSetting.Users.Select(PlayerModel.CreateFromPlayerData).ToArray();
     }
 
     public void SetGameTimer(){
