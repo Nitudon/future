@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using AGS.Domains;
 using UnityEngine;
 using UniRx;
+using UdonLib.Commons;
 using UdonObservable.Commons;
 
-public class RoomModel : Component {
+public class RoomModel : UdonBehaviour {
 
     public RoomData RoomSetting;
 
