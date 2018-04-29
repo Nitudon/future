@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UdonLib.Commons;
 
-public class GamePlayerView : MonoBehaviour {
+public class GamePlayerView : UdonBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void SyncPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
 }
