@@ -8,15 +8,18 @@ public class SyncObjectModel : MonoBehaviour {
     private ReactiveProperty<Vector3> _syncPosition;
     public IReadOnlyReactiveProperty<Vector3> PlayerPosition => _syncPosition;
 
-    private Client _owner;
+    private UserData _owner;
+
+    public int OwnerId => _owner.UserId;
 
     [SerializeField]
     private bool _isMine = true;
     public bool IsMine => _isMine;
 
-    public static SyncObjectModel CreateSyncObject(){
-        var model = Instantiate<SyncObjectModel>(new SyncObjectModel());
+    public static T CreateSyncObject<T>(UserData owner) where T : SyncObjectModel, new(){
+        var model = Instantiate<T>(new T());
 
+        model._owner = owner;
         model._isMine = false;
 
         return model;
