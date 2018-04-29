@@ -10,16 +10,17 @@ public class RoomModel : UdonBehaviour {
 
     public RoomData RoomSetting;
 
+    public UserData MasterUser => RoomSetting.Users[0];
+
     [SerializeField]
     private ReactiveProperty<int> _gameTimer;
     public IReadOnlyReactiveProperty<int> GameTimer => _gameTimer;
 
-    public RoomModel(RoomData data){
+	public void Initialize(RoomData data){
         RoomSetting = data;
     }
 
-	public void Initialize(){
+    public void SetGameTimer(){
         _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime);
     }
-
 }

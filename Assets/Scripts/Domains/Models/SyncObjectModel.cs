@@ -10,6 +10,7 @@ public class SyncObjectModel : MonoBehaviour {
 
     private Client _owner;
 
+    [SerializeField]
     private bool _isMine = true;
     public bool IsMine => _isMine;
 
