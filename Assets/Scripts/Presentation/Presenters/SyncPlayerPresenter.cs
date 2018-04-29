@@ -17,13 +17,4 @@ public class SyncPlayerPresenter : MonoBehaviour {
             .Subscribe(_gamePlayerView.SyncPosition);
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
