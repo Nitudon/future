@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class SyncPlayerPresenter : MonoBehaviour {
+public class PlayerSynchronizer : MonoBehaviour {
 
     [SerializeField]
     private GamePlayerView _gamePlayerView;
