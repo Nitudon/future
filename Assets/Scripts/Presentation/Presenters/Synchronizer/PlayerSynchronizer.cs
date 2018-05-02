@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using AGS.Domains;
 using UnityEngine;
 using UniRx;
 
@@ -17,4 +16,8 @@ public class PlayerSynchronizer : MonoBehaviour {
             .Subscribe(_gamePlayerView.SyncPosition);
     }
 
+    public void ReceiveData(string message)
+    {
+        var data = JsonUtility.FromJson<SyncPlayerData>(message);
+    }
 }

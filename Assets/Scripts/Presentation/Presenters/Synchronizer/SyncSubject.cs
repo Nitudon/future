@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using WebSocketSharp;
 using UnityEngine;
 using AGS.Domains;
 using AGS.Websocket;
@@ -25,14 +24,14 @@ public class SyncSubject : MonoBehaviour {
         public string Message;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public Subject<SyncRoomData> RoomSubject = new Subject<SyncRoomData>();
+    [SerializeField]
+    private RoomSynchronizer _roomSynchronizer;
 
-    public Subject<SyncObjectData> ObjectSubject = new Subject<SyncObjectData>();
+    [SerializeField]
+    private ObjectSynchronizer _objectSynchronizer;
 
-    public Subject<SyncPlayerData> PlayerSubject = new Subject<SyncPlayerData>();
+    [SerializeField]
+    private PlayerSynchronizer _playerSynchronizer;
 
     private Client _websocketClient;
     private SyncMessage _syncMessage;
@@ -52,8 +51,20 @@ public class SyncSubject : MonoBehaviour {
         _websocketClient.SendMessage(JsonUtility.ToJson(_syncMessage));
     }
 
-    private void ReceiveSyncData()
+    private void ReceiveSyncData(object sender, MessageEventArgs e)
     {
+        var data = JsonUtility.FromJson<SyncMessage>(e.Data);
+        switch(data.SyncType)
+        {
+            case SyncType.Room:
+                return;
 
+            case SyncType.Object:
+                return;
+
+            case SyncType.Player:
+                _playerSynchronizer.ReceiveData(data.Message);
+                return;
+        }
     }
 }
