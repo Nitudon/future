@@ -1,16 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using AGS.Domains;
 using UnityEngine;
+using UniRx;
+using Zenject;
 
-public class ObjectSynchronizer : MonoBehaviour {
+public class ObjectSynchronizer : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Inject]
+    private SyncSubject _syncSubject;
+
+    [Inject]
+    private RoomModel _roomModel;
+
+    public void SendData(SyncObjectData data)
+    {
+        _syncSubject.SendSyncData(SyncSubject.SyncType.Object, JsonUtility.ToJson(data));
+    }
+
+    public void ReceiveData(string message)
+    {
+        var data = JsonUtility.FromJson<SyncObjectData>(message);
+
+        if (data.Id > _roomModel.Players.Length - 1 || data.Id < 0 || _roomModel.Players == null)
+        {
+            Debug.LogError("Invalid Sync Data for Player");
+            return;
+        }
+
+        var target = _roomModel.Players[data.Id];
+        target.AffectSyncPlayerData(data);
+
+    }
 }
