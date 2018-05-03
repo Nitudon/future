@@ -21,4 +21,29 @@ public class PlayerModel : SyncObjectModel
         player._playerHp = new FloatReactiveProperty(user.PlayerParam.Hp);
         return player;
     }
+
+    public void AffectSyncPlayerData(SyncPlayerData data)
+    {
+        AffectSyncObjectData(data);
+        _playerHp.Value = data.Hp;
+    }
+
+    public void DamageHp(float damage)
+    {
+        if(damage > 0)
+        {
+            if(_playerHp.Value > damage)
+            {
+                _playerHp.Value = 0;
+            }
+            else
+            {
+                _playerHp.Value -= damage;
+            }
+        }
+        else
+        {
+            Debug.LogError("Invalid damage for player");
+        }
+    }
 }
