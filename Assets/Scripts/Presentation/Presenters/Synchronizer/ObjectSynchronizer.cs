@@ -28,7 +28,7 @@ public class ObjectSynchronizer : MonoBehaviour
         }
 
         var target = _roomModel.Players[data.Id];
-        target.AffectSyncPlayerData(data);
+        //target.AffectSyncPlayerData(data);
 
     }
 }
