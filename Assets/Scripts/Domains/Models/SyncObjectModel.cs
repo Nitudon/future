@@ -9,6 +9,9 @@ public class SyncObjectModel : UdonBehaviour {
     private ReactiveProperty<Vector3> _syncPosition;
     public IReadOnlyReactiveProperty<Vector3> PlayerPosition => _syncPosition;
 
+    private string _id;
+    public string Id => _id;
+
     private UserData _owner;
 
     public int OwnerId => _owner.UserId;
@@ -17,13 +20,11 @@ public class SyncObjectModel : UdonBehaviour {
     private bool _isMine = true;
     public bool IsMine => _isMine;
 
-    public static T CreateSyncObject<T>(UserData owner) where T : SyncObjectModel, new(){
-        var model = Instantiate<T>(new T());
-
-        model._owner = owner;
-        model._isMine = false;
-
-        return model;
+    public void SetObjectData(string id, UserData owner, bool isMine = false)
+    {
+        _id = id;
+        _owner = owner;
+        _isMine = isMine;
     }
 
     public void AffectSyncObjectData(SyncObjectData data)
