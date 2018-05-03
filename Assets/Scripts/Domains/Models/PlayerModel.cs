@@ -10,14 +10,17 @@ using UniRx;
 public class PlayerModel : SyncObjectModel
 {
 
+    private int _id;
+    public int Id => _id;
+
     private FloatReactiveProperty _playerHp;
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
-    public static PlayerModel CreateFromPlayerData(UserData user)
+    public static PlayerModel CreateFromPlayerData(UserData user, Transform transform)
     {
+        var player = Instantiate(new PlayerModel() ,transform);
 
-        var player = CreateSyncObject<PlayerModel>(user);
-
+        player._id = user.UserId;
         player._playerHp = new FloatReactiveProperty(user.PlayerParam.Hp);
         return player;
     }

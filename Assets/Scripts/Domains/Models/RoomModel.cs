@@ -12,6 +12,9 @@ public class RoomModel : UdonBehaviour{
     private Transform _syncObjectRoot;
 
     [SerializeField]
+    private Transform _syncPlayerRoot;
+
+    [SerializeField]
     private ReactiveProperty<int> _gameTimer;
     public IReadOnlyReactiveProperty<int> GameTimer => _gameTimer;
 
@@ -24,14 +27,16 @@ public class RoomModel : UdonBehaviour{
     private SyncObjectPool _syncObjectPool;
     public Dictionary<string, SyncObjectModel> SyncObjects => _syncObjectPool.SyncObjects;
 
-	public void Initialize(RoomData data){
+	public void Initialize(RoomData data)
+    {
         RoomSetting = data;
 
-        _players = RoomSetting.Users.Select(PlayerModel.CreateFromPlayerData).ToArray();
+        _players = RoomSetting.Users.Select(user => PlayerModel.CreateFromPlayerData(user, _syncPlayerRoot)).ToArray();
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
     }
 
-    public void SetGameTimer(){
+    public void SetGameTimer()
+    {
         _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime);
     }
 }
