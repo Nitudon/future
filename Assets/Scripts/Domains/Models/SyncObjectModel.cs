@@ -25,7 +25,7 @@ public class SyncObjectModel : MonoBehaviour {
         return model;
     }
 
-    public void SyncPosition()
+    public void StartSyncPosition()
     {
         MainThreadDispatcher.StartUpdateMicroCoroutine(UpdateCoroutine());
     }

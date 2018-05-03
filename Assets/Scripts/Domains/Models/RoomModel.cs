@@ -16,6 +16,7 @@ public class RoomModel : UdonBehaviour{
     public UserData MasterUser => RoomSetting.Users[0];
 
     private PlayerModel[] _players;
+    public PlayerModel[] Players => _players;
 
 	public void Initialize(RoomData data){
         RoomSetting = data;

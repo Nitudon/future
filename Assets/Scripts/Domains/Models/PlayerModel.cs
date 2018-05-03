@@ -7,12 +7,14 @@ using UniRx;
 /// <summary>
 /// プレイヤーのモデル
 /// </summary>
-public class PlayerModel : SyncObjectModel {
+public class PlayerModel : SyncObjectModel
+{
 
     private FloatReactiveProperty _playerHp;
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
-    public static PlayerModel CreateFromPlayerData(UserData user){
+    public static PlayerModel CreateFromPlayerData(UserData user)
+    {
 
         var player = CreateSyncObject<PlayerModel>(user);
 
