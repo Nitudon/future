@@ -693,7 +693,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2143560874}
-  - component: {fileID: 2143560873}
   - component: {fileID: 2143560872}
   m_Layer: 0
   m_Name: LobbySystem
@@ -711,17 +710,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e9a2fe78809eaf47b59fba39fa41d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2143560873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2143560871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4466d2643c4ebaf4eb292e602fb9378c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2143560874
