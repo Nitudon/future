@@ -28,6 +28,11 @@ public class PlayerModel : SyncObjectModel
         return player;
     }
 
+    public void SwitchActive(bool active)
+    {
+        _onActivated.Value = active;
+    }
+
     public void AffectSyncPlayerData(SyncPlayerData data)
     {
         AffectSyncObjectData(data);
