@@ -8,7 +8,8 @@ public class TrackingHandler : MonoBehaviour, ITrackableEventHandler{
 
     #region MEMBER_VARIABLES
 
-    public BoolReactiveProperty OnTrackingFoundStatusChanged = new BoolReactiveProperty(false);
+    private BoolReactiveProperty _onTrackingFoundStatusChanged = new BoolReactiveProperty(false);
+    public IReadOnlyReactiveProperty<bool> OnTrackingFoundStatusChanged => _onTrackingFoundStatusChanged;
 
     private TrackableBehaviour _trackingBehaviour;
 
@@ -72,13 +73,13 @@ public class TrackingHandler : MonoBehaviour, ITrackableEventHandler{
 
     private void OnTrackingFound()
     {
-        OnTrackingFoundStatusChanged.Value = true;
+        _onTrackingFoundStatusChanged.Value = true;
     }
 
 
     private void OnTrackingLost()
     {
-        OnTrackingFoundStatusChanged.Value = false;
+        _onTrackingFoundStatusChanged.Value = false;
     }
 
     #endregion // PROTECTED_METHODS

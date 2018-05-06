@@ -16,6 +16,9 @@ public class PlayerModel : SyncObjectModel
     private FloatReactiveProperty _playerHp;
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
+    private BoolReactiveProperty _onActivated = new BoolReactiveProperty(false);
+    public IReadOnlyReactiveProperty<bool> OnActivated => _onActivated;
+
     public static PlayerModel CreateFromPlayerData(UserData user, Transform transform)
     {
         var player = Instantiate(new PlayerModel() ,transform);

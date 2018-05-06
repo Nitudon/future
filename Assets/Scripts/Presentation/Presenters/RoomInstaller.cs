@@ -9,5 +9,6 @@ public class RoomInstaller : MonoInstaller {
     {
         Container.Bind<RoomModel>().AsSingle();
         Container.Bind<SyncSubject>().AsSingle();
+        Container.Bind<TrackingHandler>().AsSingle();
     }
 }
