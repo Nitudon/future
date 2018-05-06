@@ -167,49 +167,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.40821788
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.23456968
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.10938163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.8754261
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114472907173096922, guid: dd095bac6d1027e4fbfc594ba216d369,
-        type: 2}
-      propertyPath: _gamePlayerModel
-      value: 
-      objectReference: {fileID: 606529055}
-    - target: {fileID: 114472907173096922, guid: dd095bac6d1027e4fbfc594ba216d369,
-        type: 2}
-      propertyPath: _gamePlayerView
-      value: 
-      objectReference: {fileID: 606529054}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &606529054 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114087463378197888, guid: dd095bac6d1027e4fbfc594ba216d369,
-    type: 2}
-  m_PrefabInternal: {fileID: 606529053}
-  m_Script: {fileID: 11500000, guid: 42b9f01ad9e136946ad3b1e94b54003d, type: 3}
---- !u!114 &606529055 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114397780022586524, guid: dd095bac6d1027e4fbfc594ba216d369,
-    type: 2}
-  m_PrefabInternal: {fileID: 606529053}
-  m_Script: {fileID: 11500000, guid: 03ae0851d9b00364498ed0c90357092f, type: 3}
 --- !u!1 &883366708
 GameObject:
   m_ObjectHideFlags: 0
