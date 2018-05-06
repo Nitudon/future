@@ -36,7 +36,7 @@ namespace AGS.Websocket
             HandleFunc();
 
             _connection.Connect();
-            await yie
+            await new WaitUntil(() => _connection.IsAlive);
         }
 
         public void SendMessage(string message)

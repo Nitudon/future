@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AGS.Domains;
+using AGS.Websocket;
 using UnityEngine;
 using UniRx;
 using UdonLib.Commons;
@@ -11,6 +13,9 @@ public class RoomModel : UdonBehaviour{
 
     [Inject]
     private TrackingHandler _trackingHandler;
+
+    [Inject]
+    private SyncSubject _syncSubject;
 
     [SerializeField]
     private Transform _syncObjectRoot;

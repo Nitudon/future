@@ -1,4 +1,5 @@
-﻿using WebSocketSharp;
+﻿using System.Threading.Tasks;
+using WebSocketSharp;
 using UnityEngine;
 using AGS.Domains;
 using AGS.Websocket;
@@ -36,10 +37,11 @@ public class SyncSubject : MonoBehaviour {
     private Client _websocketClient;
     private SyncMessage _syncMessage;
 
-    public void Initialize()
+    public async Task InitializeAsync()
     {
         _websocketClient = new Client();
-        _websocketClient.Connect();
+        await _websocketClient.ConnectAsync();
+        _websocketClient.OnReceiveMessageListener += ReceiveSyncData;
 
         _syncMessage = new SyncMessage();
     }
