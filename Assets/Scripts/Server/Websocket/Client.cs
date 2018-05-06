@@ -1,8 +1,10 @@
-﻿using WebSocketSharp;
+﻿using System.Threading.Tasks;
+using WebSocketSharp;
 using WebSocketSharp.Net;
 using AGS.Websocket;
 using UnityEngine;
 using UdonLib.Commons;
+using UniRx;
 
 namespace AGS.Websocket
 {
@@ -23,7 +25,7 @@ namespace AGS.Websocket
             _connection = new WebSocket(address);
         }
 
-        public void Connect()
+        public async Task ConnectAsync()
         {
             if (_connection == null)
             {
@@ -34,6 +36,7 @@ namespace AGS.Websocket
             HandleFunc();
 
             _connection.Connect();
+            await yie
         }
 
         public void SendMessage(string message)
