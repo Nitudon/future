@@ -122,3 +122,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gamePlayerView: {fileID: 114087463378197888}
   _gamePlayerModel: {fileID: 114397780022586524}
+  _gamePlayerUI: {fileID: 0}
