@@ -15,7 +15,7 @@ public class RoomModel : UdonBehaviour{
     private Transform _syncPlayerRoot;
 
     [SerializeField]
-    private ReactiveProperty<int> _gameTimer;
+    private IntReactiveProperty _gameTimer;
     public IReadOnlyReactiveProperty<int> GameTimer => _gameTimer;
 
     public RoomData RoomSetting;
@@ -37,6 +37,6 @@ public class RoomModel : UdonBehaviour{
 
     public void SetGameTimer()
     {
-        _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime);
+        _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime) as IntReactiveProperty;
     }
 }
