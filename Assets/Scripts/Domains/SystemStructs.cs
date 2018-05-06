@@ -6,8 +6,6 @@
     public struct RoomData{
         public int RoomId;
 
-        public int MasterUserId;
-
         public UserData[] Users;
 
         public float TotalGameTime;

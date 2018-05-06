@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AGS.Domains;
+using AGS.WebRequest;
 using UnityEngine;
 using Zenject;
 
@@ -10,8 +11,9 @@ public class GameRulePresenter : MonoBehaviour {
     [Inject]
     private RoomModel _roomModel;
 
-    public async Task SetupGame(RoomData roomdata)
+    public async Task SetupGame(string roomId)
     {
-        _roomModel.Initialize(roomdata);
+        var room = await RoomWebRequest.FetchRoomDataAsync(roomId);
+        _roomModel.Initialize(room);
     }
 }
