@@ -15,6 +15,10 @@ namespace AGS.WebRequest
         public static async Task<RoomData> FetchRoomDataAsync(string id)
         {
             var www = await ObservableWWW.Get($"https://{URL_DOMAIN}/?room_id={id}");
+            if(www == null)
+            {
+                Debug.LogError("www request error");
+            }
             return JsonUtility.FromJson<RoomData>(www);
         }
     }
