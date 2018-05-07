@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniRx;
+﻿using UnityEngine;
 
 public class RoomUserModel : MonoBehaviour {
 
@@ -14,13 +11,4 @@ public class RoomUserModel : MonoBehaviour {
     private RoomAccessController _roomAccessController;
     public RoomAccessController RoomAccessController => _roomAccessController;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

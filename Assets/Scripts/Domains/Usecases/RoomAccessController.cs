@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AGS.Domains;
-using UnityEngine;
-using UniRx;
+﻿using UniRx;
 
 public class RoomAccessController
 {

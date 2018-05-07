@@ -1,7 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using AGS.Domains;
 using AGS.WebRequest;
 using UnityEngine;
 using Zenject;
@@ -16,7 +13,7 @@ public class GameRulePresenter : MonoBehaviour {
 
     private void Start()
     {
-        SetupGame("");
+        SetupGame("Room1").Start();
     }
 
     public async Task SetupGame(string roomId)
