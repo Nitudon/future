@@ -26,7 +26,7 @@ public class RoomModel : UdonBehaviour{
     public IReadOnlyReactiveProperty<int> GameTimer => _gameTimer;
 
     public RoomData RoomSetting;
-    public UserData MasterUser => RoomSetting.Users[0];
+    public PlayerData MasterUser => RoomSetting.Players[0];
 
     private PlayerModel[] _players;
     public PlayerModel[] Players => _players;
@@ -38,13 +38,13 @@ public class RoomModel : UdonBehaviour{
     {
         RoomSetting = data;
 
-        _players = RoomSetting.Users.Select(user => PlayerModel.CreateFromPlayerData(user, _syncPlayerRoot)).ToArray();
+        _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
-        _trackingHandler.OnTrackingFoundStatusChanged
-            .Where(status => status)
-            .Subscribe(_ => ActivateRoom())
-            .AddTo(this);
+        //_trackingHandler.OnTrackingFoundStatusChanged
+        //    .Where(status => status)
+        //    .Subscribe(_ => ActivateRoom())
+        //    .AddTo(this);
     }
 
     private void ActivateRoom()
@@ -54,6 +54,6 @@ public class RoomModel : UdonBehaviour{
 
     public void SetGameTimer()
     {
-        _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime) as IntReactiveProperty;
+        //_gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime) as IntReactiveProperty;
     }
 }

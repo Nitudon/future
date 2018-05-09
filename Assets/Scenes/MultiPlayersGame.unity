@@ -154,53 +154,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 80372402}
---- !u!1001 &606529053
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1221762548}
-    m_Modifications:
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114472907173096922, guid: dd095bac6d1027e4fbfc594ba216d369,
-        type: 2}
-      propertyPath: _gamePlayerUI
-      value: 
-      objectReference: {fileID: 1485855161}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: dd095bac6d1027e4fbfc594ba216d369, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &883366708
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +162,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 883366709}
-  - component: {fileID: 883366710}
   - component: {fileID: 883366711}
   m_Layer: 0
   m_Name: Installer
@@ -231,21 +183,6 @@ Transform:
   m_Father: {fileID: 1708111693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &883366710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 883366708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components: []
-  _identifier: 
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!114 &883366711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,8 +260,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1726409728}
+  m_Children: []
   m_Father: {fileID: 1384612283}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -559,6 +495,10 @@ MonoBehaviour:
   _syncPlayerRoot: {fileID: 1221762548}
   _gameTimer:
     value: 0
+  RoomSetting:
+    Id: 
+    Name: 
+    Players: []
 --- !u!4 &1384612283
 Transform:
   m_ObjectHideFlags: 0
@@ -806,6 +746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29361ecffa435164fb3948a116639ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roomModel: {fileID: 1384612282}
+  _syncSubject: {fileID: 1741501010}
 --- !u!1 &1708111692
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,11 +798,6 @@ MonoBehaviour:
   _contractNames: []
   _parentContractName: 
   _parentContractNames: []
---- !u!4 &1726409728 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4794431046129134, guid: dd095bac6d1027e4fbfc594ba216d369,
-    type: 2}
-  m_PrefabInternal: {fileID: 606529053}
 --- !u!1 &1741501006
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,8 +806,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1741501007}
+  - component: {fileID: 1741501010}
   - component: {fileID: 1741501008}
   - component: {fileID: 1741501009}
+  - component: {fileID: 1741501011}
   m_Layer: 0
   m_Name: Synchronizer
   m_TagString: Untagged
@@ -911,6 +850,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2519623cad09c5747bee68c42c63fe3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1741501010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741501006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a6d97e0c0de77499cc151a6be15807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomSynchronizer: {fileID: 1741501008}
+  _objectSynchronizer: {fileID: 1741501011}
+  _playerSynchronizer: {fileID: 1741501009}
+--- !u!114 &1741501011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741501006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c8301968abb31449e239b622398277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1751422912

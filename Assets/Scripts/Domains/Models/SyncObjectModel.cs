@@ -6,18 +6,18 @@ using UdonLib.Commons;
 
 public class SyncObjectModel : UdonBehaviour {
 
-    private ReactiveProperty<Vector3> _syncPosition;
+    protected ReactiveProperty<Vector3> _syncPosition;
     public IReadOnlyReactiveProperty<Vector3> PlayerPosition => _syncPosition;
 
-    private string _id;
+    protected string _id;
     public string Id => _id;
 
-    private UserData _owner;
+    protected UserData _owner;
 
     public int OwnerId => _owner.UserId;
 
     [SerializeField]
-    private bool _isMine = true;
+    protected bool _isMine = true;
     public bool IsMine => _isMine;
 
     public void SetObjectData(string id, UserData owner, bool isMine = false)

@@ -7,9 +7,7 @@ using UniRx;
 /// </summary>
 public class PlayerModel : SyncObjectModel
 {
-
-    private int _id;
-    public int Id => _id;
+    private static readonly string PRIMITIVE_PATH = "Prefabs/GamePlayer";
 
     private FloatReactiveProperty _playerHp;
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
@@ -17,12 +15,14 @@ public class PlayerModel : SyncObjectModel
     private BoolReactiveProperty _onActivated = new BoolReactiveProperty(false);
     public IReadOnlyReactiveProperty<bool> OnActivated => _onActivated;
 
-    public static PlayerModel CreateFromPlayerData(UserData user, Transform transform)
+    public static PlayerModel CreateFromPlayerData(PlayerData user, Transform transform, bool mine = false)
     {
-        var player = Instantiate(new PlayerModel() ,transform);
+        var primitive = Resources.Load<PlayerModel>(PRIMITIVE_PATH);
+        var player = Instantiate<PlayerModel>(primitive ,transform);
 
-        player._id = user.UserId;
-        player._playerHp = new FloatReactiveProperty(user.PlayerParam.Hp);
+        player._id = user.Id;
+        player._playerHp = new FloatReactiveProperty(user.Hp);
+        player._
         return player;
     }
 

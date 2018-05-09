@@ -14,7 +14,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel> {
     public SyncObjectPool(Transform transform)
     {
         SyncObjects = new Dictionary<string, SyncObjectModel>();
-        _primitiveObject = new SyncObjectModel();
+        _primitiveObject = new GameObject().AddComponent<SyncObjectModel>();
         _parentTransform = transform;
     }
 

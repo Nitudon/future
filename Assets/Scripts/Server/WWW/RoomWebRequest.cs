@@ -19,6 +19,16 @@ namespace AGS.WebRequest
             }
             return JsonUtility.FromJson<RoomData>(www);
         }
+
+        public static async Task<RoomData> TestRoomDataAsync()
+        {
+            var www = await ObservableWWW.Get($"http://{URL_DOMAIN}/test");
+            if (www == null)
+            {
+                Debug.LogError("www request error");
+            }
+            return JsonUtility.FromJson<RoomData>(www);
+        }
     }
 }
 

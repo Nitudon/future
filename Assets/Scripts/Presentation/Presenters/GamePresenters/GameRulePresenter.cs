@@ -5,20 +5,20 @@ using Zenject;
 
 public class GameRulePresenter : MonoBehaviour {
 
-    [Inject]
+    [SerializeField]
     private RoomModel _roomModel;
 
-    [Inject]
+    [SerializeField]
     private SyncSubject _syncSubject;
 
     private void Start()
     {
-        SetupGame("Room1").Start();
+        SetupGame("Room1");
     }
 
     public async Task SetupGame(string roomId)
     {
-        var room = await RoomWebRequest.FetchRoomDataAsync(roomId);
+        var room = await RoomWebRequest.TestRoomDataAsync();
         _roomModel.Initialize(room);
         await _syncSubject.InitializeAsync();
     }

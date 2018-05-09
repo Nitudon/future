@@ -27,6 +27,7 @@ namespace AGS.Websocket
 
         public async Task ConnectAsync()
         {
+
             if (_connection == null)
             {
                 InstantLog.StringLogError("Missing websocket");
