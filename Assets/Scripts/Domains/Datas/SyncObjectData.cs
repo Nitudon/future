@@ -9,7 +9,7 @@
     [System.Serializable]
     public class SyncObjectData
     {
-        public int Id;
+        public string Id;
         public float PositionX;
         public float PositionY;
         public float PositionZ;
@@ -19,7 +19,8 @@
     [System.Serializable]
     public class SyncPlayerData : SyncObjectData
     {
-        public int Hp;
+        public new int Id;
+        public float Hp;
     }
 
 }
