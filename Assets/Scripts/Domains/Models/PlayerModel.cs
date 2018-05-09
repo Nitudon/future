@@ -9,6 +9,9 @@ public class PlayerModel : SyncObjectModel
 {
     private static readonly string PRIMITIVE_PATH = "Prefabs/GamePlayer";
 
+    private new int _id;
+    public new int Id => _id;
+
     private FloatReactiveProperty _playerHp;
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
@@ -22,7 +25,7 @@ public class PlayerModel : SyncObjectModel
 
         player._id = user.Id;
         player._playerHp = new FloatReactiveProperty(user.Hp);
-        player._
+        player._isMine = mine;
         return player;
     }
 

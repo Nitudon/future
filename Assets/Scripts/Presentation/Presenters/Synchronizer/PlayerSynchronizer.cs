@@ -1,15 +1,23 @@
-﻿using AGS.Domains;
+﻿using System.Linq;
+using AGS.Domains;
 using UnityEngine;
 using UniRx;
 using Zenject;
 
 public class PlayerSynchronizer : MonoBehaviour {
 
-    [Inject]
+    [SerializeField]
     private SyncSubject _syncSubject;
 
-    [Inject]
+    [SerializeField]
     private RoomModel _roomModel;
+
+    private PlayerModel _myPlayer;
+
+    public void Initialize()
+    {
+        _myPlayer = _roomModel.Players.FirstOrDefault(player => player.IsMine);
+    }
 
     public void SendData(SyncPlayerData data)
     {

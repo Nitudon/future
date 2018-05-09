@@ -7,7 +7,7 @@ using UdonLib.Commons;
 public class SyncObjectModel : UdonBehaviour {
 
     protected ReactiveProperty<Vector3> _syncPosition;
-    public IReadOnlyReactiveProperty<Vector3> PlayerPosition => _syncPosition;
+    public IReadOnlyReactiveProperty<Vector3> SyncPosition => _syncPosition;
 
     protected string _id;
     public string Id => _id;
@@ -20,11 +20,12 @@ public class SyncObjectModel : UdonBehaviour {
     protected bool _isMine = true;
     public bool IsMine => _isMine;
 
-    public void SetObjectData(string id, UserData owner, bool isMine = false)
+    protected override void OnEnable()
     {
-        _id = id;
-        _owner = owner;
-        _isMine = isMine;
+        if(_isMine)
+        {
+            StartSyncPosition();
+        }
     }
 
     public void AffectSyncObjectData(SyncObjectData data)
