@@ -4,27 +4,27 @@ using AGS.Domains;
 using UnityEngine;
 using UniRx.Toolkit;
 
-public class SyncObjectPool : ObjectPool<SyncObjectModel> {
+public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
 
-    public Dictionary<string, SyncObjectModel> SyncObjects;
+    public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects;
 
     private Transform _parentTransform;
-    private SyncObjectModel _primitiveObject;
+    private SyncObjectModel<SyncObjectData> _primitiveObject;
 
     public SyncObjectPool(Transform transform)
     {
-        SyncObjects = new Dictionary<string, SyncObjectModel>();
-        _primitiveObject = new GameObject().AddComponent<SyncObjectModel>();
+        SyncObjects = new Dictionary<string, SyncObjectModel<SyncObjectData>>();
+        _primitiveObject = new GameObject().AddComponent<SyncObjectModel<SyncObjectData>>();
         _parentTransform = transform;
     }
 
-    protected override SyncObjectModel CreateInstance()
+    protected override SyncObjectModel<SyncObjectData> CreateInstance()
     {
-        var model = GameObject.Instantiate<SyncObjectModel>(_primitiveObject, _parentTransform);
+        var model = GameObject.Instantiate<SyncObjectModel<SyncObjectData>>(_primitiveObject, _parentTransform);
         return model;
     }
 
-    public SyncObjectModel Create(UserData owner)
+    public SyncObjectModel<SyncObjectData> Create(UserData owner)
     {
         var model = Rent();
         string id = Guid.NewGuid().ToString();
@@ -37,7 +37,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel> {
 
     public void Destroy(string id)
     {
-        SyncObjectModel model;
+        SyncObjectModel<SyncObjectData> model;
         if(SyncObjects.TryGetValue(id, out model))
         {
             Return(model);

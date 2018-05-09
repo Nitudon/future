@@ -3,8 +3,9 @@ using AGS.Domains;
 using UniRx;
 using UnityEngine;
 using UdonLib.Commons;
+using System;
 
-public class SyncObjectModel : UdonBehaviour {
+public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
 
     protected ReactiveProperty<Vector3> _syncPosition;
     public IReadOnlyReactiveProperty<Vector3> SyncPosition => _syncPosition;
@@ -13,6 +14,7 @@ public class SyncObjectModel : UdonBehaviour {
     public string Id => _id;
 
     protected UserData _owner;
+    protected SyncObjectData _cachedSyncObjectData;
 
     public int OwnerId => _owner.UserId;
 
@@ -28,6 +30,26 @@ public class SyncObjectModel : UdonBehaviour {
         }
     }
 
+    public SyncObjectData GetSyncBaseData()
+    {
+        Vector3 syncPosition = _syncPosition.Value;
+        _cachedSyncObjectData.Id = _id;
+        _cachedSyncObjectData.PositionX = syncPosition.x;
+        _cachedSyncObjectData.PositionY = syncPosition.y;
+        _cachedSyncObjectData.PositionZ = syncPosition.z;
+        _cachedSyncObjectData.IsDestroyed = IsDestroyed;
+
+        return _cachedSyncObjectData;
+    }
+
+    public void SetObjectData(string id, UserData owner)
+    {
+        _id = id;
+        _owner = owner;
+    }
+
+    public virtual T GetSyncModelData() { return GetSyncBaseData() as T; }
+
     public void AffectSyncObjectData(SyncObjectData data)
     {
         if(data.IsDestroyed)
@@ -41,6 +63,7 @@ public class SyncObjectModel : UdonBehaviour {
     public void StartSyncPosition()
     {
         MainThreadDispatcher.StartUpdateMicroCoroutine(UpdateCoroutine());
+        _cachedSyncObjectData = new SyncObjectData();
     }
 
     private IEnumerator UpdateCoroutine()

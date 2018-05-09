@@ -32,7 +32,7 @@ public class RoomModel : UdonBehaviour{
     public PlayerModel[] Players => _players;
 
     private SyncObjectPool _syncObjectPool;
-    public Dictionary<string, SyncObjectModel> SyncObjects => _syncObjectPool.SyncObjects;
+    public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjectPool.SyncObjects;
 
 	public void Initialize(RoomData data)
     {

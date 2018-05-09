@@ -5,7 +5,7 @@ using UniRx;
 /// <summary>
 /// プレイヤーのモデル
 /// </summary>
-public class PlayerModel : SyncObjectModel
+public class PlayerModel : SyncObjectModel<SyncPlayerData>
 {
     private static readonly string PRIMITIVE_PATH = "Prefabs/GamePlayer";
 
@@ -27,6 +27,14 @@ public class PlayerModel : SyncObjectModel
         player._playerHp = new FloatReactiveProperty(user.Hp);
         player._isMine = mine;
         return player;
+    }
+
+    public override SyncPlayerData GetSyncModelData()
+    {
+        var data = GetSyncBaseData() as SyncPlayerData;
+        data.Hp = _playerHp.Value;
+
+        return data;
     }
 
     public void SwitchActive(bool active)
