@@ -16,7 +16,7 @@ public class PlayerPresenter : MonoBehaviour, System.IDisposable {
 
     public void Initialize()
     {
-        _gamePlayerModel.PlayerPosition
+        _gamePlayerModel.SyncPosition
             .Subscribe(_gamePlayerView.SyncPosition)
             .AddTo(_disposable);
 
