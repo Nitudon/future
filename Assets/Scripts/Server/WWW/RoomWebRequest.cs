@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AGS.Domains;
 using UnityEngine;
 using UniRx;
+using UdonLib.Commons;
 
 namespace AGS.WebRequest
 {
@@ -12,23 +13,19 @@ namespace AGS.WebRequest
         
         public static async Task<RoomData> FetchRoomDataAsync(string id)
         {
-            var www = await ObservableWWW.Get($"https://{URL_DOMAIN}/?room_id={id}");
-            if(www == null)
-            {
-                Debug.LogError("www request error");
-            }
-            return JsonUtility.FromJson<RoomData>(www);
+            return await HttpRequestAsync.GetRequestAsync<RoomData>($"https://{URL_DOMAIN}/?room_id={id}");
         }
 
         public static async Task<RoomData> TestRoomDataAsync()
         {
-            var www = await ObservableWWW.Get($"http://{URL_DOMAIN}/test");
-            if (www == null)
-            {
-                Debug.LogError("www request error");
-            }
-            return JsonUtility.FromJson<RoomData>(www);
+            return await HttpRequestAsync.GetRequestAsync<RoomData>($"https://{URL_DOMAIN}/test");
         }
+
+        public static async Task<RoomData> JoinRoomAsync()
+        {
+            return await HttpRequestAsync.GetRequestAsync<RoomData>($"https://{URL_DOMAIN}/room/join");
+        }
+
     }
 }
 
