@@ -7,7 +7,7 @@ using System;
 
 public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
 
-    protected ReactiveProperty<Vector3> _syncPosition;
+    protected ReactiveProperty<Vector3> _syncPosition = new ReactiveProperty<Vector3>();
     public IReadOnlyReactiveProperty<Vector3> SyncPosition => _syncPosition;
 
     protected string _id;

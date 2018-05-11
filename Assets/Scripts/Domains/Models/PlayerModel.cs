@@ -12,7 +12,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     private new int _id;
     public new int Id => _id;
 
-    private FloatReactiveProperty _playerHp;
+    private FloatReactiveProperty _playerHp = new FloatReactiveProperty();
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
     private BoolReactiveProperty _onActivated = new BoolReactiveProperty(false);

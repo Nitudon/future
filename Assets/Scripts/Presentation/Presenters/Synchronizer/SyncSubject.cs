@@ -42,7 +42,7 @@ public class SyncSubject : MonoBehaviour {
         _websocketClient = new Client();
         await _websocketClient.ConnectAsync();
         _websocketClient.OnReceiveMessageListener += ReceiveSyncData;
-
+        _playerSynchronizer.Initialize();
         _syncMessage = new SyncMessage();
     }
 
