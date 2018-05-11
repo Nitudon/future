@@ -18,7 +18,7 @@ public class GameRulePresenter : MonoBehaviour {
 
     public async Task SetupGame(string roomId)
     {
-        var room = await RoomWebRequest.TestRoomDataAsync();
+        var room = await RoomWebRequest.JoinRoomAsync();
         _roomModel.Initialize(room);
         await _syncSubject.InitializeAsync();
     }

@@ -62,6 +62,7 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
 
     public void StartSyncPosition()
     {
+        _isMine = true;
         MainThreadDispatcher.StartUpdateMicroCoroutine(UpdateCoroutine());
         _cachedSyncObjectData = new SyncObjectData();
     }

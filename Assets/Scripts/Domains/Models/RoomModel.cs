@@ -39,6 +39,7 @@ public class RoomModel : UdonBehaviour{
         RoomSetting = data;
 
         _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();
+        _players.LastOrDefault().StartSyncPosition();
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
         //_trackingHandler.OnTrackingFoundStatusChanged
