@@ -21,5 +21,6 @@ public class GameRulePresenter : MonoBehaviour {
         var room = await RoomWebRequest.JoinRoomAsync();
         _roomModel.Initialize(room);
         await _syncSubject.InitializeAsync();
+
     }
 }

@@ -35,7 +35,7 @@ public class SyncSubject : MonoBehaviour {
     private PlayerSynchronizer _playerSynchronizer;
 
     private Client _websocketClient;
-    private SyncMessage _syncMessage;
+    private SyncMessage _syncMessage = new SyncMessage();
 
     public async Task InitializeAsync()
     {

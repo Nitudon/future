@@ -12,7 +12,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     private new int _id;
     public new int Id => _id;
 
-    private FloatReactiveProperty _playerHp = new FloatReactiveProperty();
+    private FloatReactiveProperty _playerHp = new FloatReactiveProperty(100);
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
 
     private BoolReactiveProperty _onActivated = new BoolReactiveProperty(false);
@@ -31,7 +31,12 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
 
     public override SyncPlayerData GetSyncModelData()
     {
-        var data = GetSyncBaseData() as SyncPlayerData;
+        var data = new SyncPlayerData();
+        data.Id = _id;
+        data.PositionX = _syncPosition.Value.x;
+        data.PositionY = _syncPosition.Value.y;
+        data.PositionZ = _syncPosition.Value.z;
+        data.IsDestroyed = IsDestroyed;
         data.Hp = _playerHp.Value;
 
         return data;
