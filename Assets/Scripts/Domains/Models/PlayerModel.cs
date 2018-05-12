@@ -20,10 +20,11 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
 
     public static PlayerModel CreateFromPlayerData(SyncPlayerData user, Transform transform, bool mine = false)
     {
+        Debug.Log(user.Id);
         var primitive = Resources.Load<PlayerModel>(PRIMITIVE_PATH);
         var player = Instantiate<PlayerModel>(primitive ,transform);
 
-        player._id = user.Id;
+        player._id = user.PlayerId;
         player._playerHp = new FloatReactiveProperty(user.Hp);
         player._isMine = mine;
         return player;
@@ -32,7 +33,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     public override SyncPlayerData GetSyncModelData()
     {
         var data = new SyncPlayerData();
-        data.Id = _id;
+        data.PlayerId = _id;
         data.PositionX = _syncPosition.Value.x;
         data.PositionY = _syncPosition.Value.y;
         data.PositionZ = _syncPosition.Value.z;

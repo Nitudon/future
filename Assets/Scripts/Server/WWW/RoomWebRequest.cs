@@ -11,14 +11,9 @@ namespace AGS.WebRequest
     {
         private static readonly string URL_DOMAIN = "localhost:8080";
         
-        public static async Task<SyncRoomData> FetchSYncRoomDataAsync(string id)
+        public static async Task<SyncRoomData> FetchSyncRoomDataAsync(string id)
         {
             return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/?room_id={id}");
-        }
-
-        public static async Task<SyncRoomData> TestSYncRoomDataAsync()
-        {
-            return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/test");
         }
 
         public static async Task<SyncRoomData> JoinRoomAsync()

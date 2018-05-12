@@ -33,13 +33,13 @@ public class PlayerSynchronizer : UdonBehaviour {
     {
         var data = JsonUtility.FromJson<SyncPlayerData>(message);
 
-        if(data.Id >_roomModel.Players.Length - 1 || data.Id < 0 || _roomModel.Players == null)
+        if(data.PlayerId >_roomModel.Players.Length - 1 || data.PlayerId < 0 || _roomModel.Players == null)
         {
             Debug.LogError("Invalid Sync Data for Player");
             return;
         }
 
-        var target = _roomModel.Players[data.Id];
+        var target = _roomModel.Players[data.PlayerId];
         target.AffectSyncPlayerData(data);
     }
 

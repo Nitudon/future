@@ -13,7 +13,7 @@ namespace AGS.Domains{
     [JsonObject("sync_room")]
     public class SyncRoomData
     {
-        [JsonProperty("id")]
+        [JsonProperty("room_id")]
         public string Id;
         [JsonProperty("name")]
         public string Name;
@@ -53,8 +53,8 @@ namespace AGS.Domains{
     [JsonObject("sync_player")]
     public class SyncPlayerData : SyncObjectData
     {
-        [JsonProperty("id")]
-        public new int Id;
+        [JsonProperty("player_id")]
+        public int PlayerId;
         [JsonProperty("name")]
         public string Name;
         [JsonProperty("hp")]
