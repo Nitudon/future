@@ -4,6 +4,7 @@ using UnityEngine;
 using AGS.Domains;
 using AGS.Websocket;
 using UniRx;
+using Newtonsoft.Json;
 
 /// <summary>
 /// サーバーとの同期データの送受信クラス
@@ -21,6 +22,7 @@ public class SyncSubject : MonoBehaviour {
     [System.Serializable]
     private class SyncMessage
     {
+        [JsonP]
         public SyncType SyncType;
         public string Message;
     }
