@@ -30,7 +30,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
         return player;
     }
 
-    public override SyncPlayerData GetSyncModelData()
+    public SyncPlayerData GetSyncModelData()
     {
         var data = new SyncPlayerData();
         data.PlayerId = _id;
@@ -50,7 +50,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
 
     public void AffectSyncPlayerData(SyncPlayerData data)
     {
-        AffectSyncObjectData(data);
+        //AffectSyncObjectData(data);
         _playerHp.Value = data.Hp;
     }
 

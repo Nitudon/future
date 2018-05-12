@@ -36,6 +36,7 @@ public class RoomModel : UdonBehaviour{
 
 	public void Initialize(SyncRoomData data)
     {
+        Debug.Log(data.Name); 
         RoomSetting = data;
 
         _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();

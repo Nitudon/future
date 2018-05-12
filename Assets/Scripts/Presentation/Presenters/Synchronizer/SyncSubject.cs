@@ -4,7 +4,6 @@ using UnityEngine;
 using AGS.Domains;
 using AGS.Websocket;
 using UniRx;
-using Newtonsoft.Json;
 
 /// <summary>
 /// サーバーとの同期データの送受信クラス

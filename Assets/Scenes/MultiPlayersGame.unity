@@ -498,6 +498,7 @@ MonoBehaviour:
   RoomSetting:
     Id: 
     Name: 
+    Time: 0
     Players: []
 --- !u!4 &1384612283
 Transform:

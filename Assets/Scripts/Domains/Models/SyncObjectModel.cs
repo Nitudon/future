@@ -48,8 +48,6 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
         _owner = owner;
     }
 
-    public virtual T GetSyncModelData() { return GetSyncBaseData() as T; }
-
     public void AffectSyncObjectData(SyncObjectData data)
     {
         if(data.IsDestroyed)
