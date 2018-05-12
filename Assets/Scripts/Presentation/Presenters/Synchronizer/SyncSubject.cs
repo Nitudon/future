@@ -12,21 +12,6 @@ using Newtonsoft.Json;
 /// </summary>
 public class SyncSubject : MonoBehaviour {
 
-    public enum SyncType
-    {
-        Room = 0,
-        Object,
-        Player,
-    }
-
-    [System.Serializable]
-    private class SyncMessage
-    {
-        [JsonP]
-        public SyncType SyncType;
-        public string Message;
-    }
-
     [SerializeField]
     private RoomSynchronizer _roomSynchronizer;
 
