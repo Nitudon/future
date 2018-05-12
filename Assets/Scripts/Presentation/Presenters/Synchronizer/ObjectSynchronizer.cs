@@ -14,7 +14,7 @@ public class ObjectSynchronizer : MonoBehaviour
 
     public void SendData(SyncObjectData data)
     {
-        _syncSubject.SendSyncData(SyncSubject.SyncType.Object, JsonUtility.ToJson(data));
+        _syncSubject.SendSyncData(SyncType.Object, JsonUtility.ToJson(data));
     }
 
     public void ReceiveData(string message)

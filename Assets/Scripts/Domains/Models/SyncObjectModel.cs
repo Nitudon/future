@@ -13,10 +13,10 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
     protected string _id;
     public string Id => _id;
 
-    protected UserData _owner;
+    protected SyncPlayerData _owner;
     protected SyncObjectData _cachedSyncObjectData = new SyncObjectData();
 
-    public int OwnerId => _owner.UserId;
+    public int OwnerId => _owner.Id;
 
     [SerializeField]
     protected bool _isMine = true;
@@ -42,7 +42,7 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
         return _cachedSyncObjectData;
     }
 
-    public void SetObjectData(string id, UserData owner)
+    public void SetObjectData(string id, SyncPlayerData owner)
     {
         _id = id;
         _owner = owner;

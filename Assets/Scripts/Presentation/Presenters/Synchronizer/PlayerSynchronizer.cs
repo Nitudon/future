@@ -3,6 +3,7 @@ using AGS.Domains;
 using UnityEngine;
 using UniRx;
 using UdonLib.Commons;
+using AGS.Domains;
 using Zenject;
 
 public class PlayerSynchronizer : UdonBehaviour {
@@ -25,7 +26,7 @@ public class PlayerSynchronizer : UdonBehaviour {
 
     private void SendData(SyncPlayerData data)
     {
-        _syncSubject.SendSyncData(SyncSubject.SyncType.Player, JsonUtility.ToJson(data));
+        _syncSubject.SendSyncData(SyncType.Player, JsonUtility.ToJson(data));
     }
 
     public void ReceiveData(string message)

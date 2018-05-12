@@ -25,8 +25,8 @@ public class RoomModel : UdonBehaviour{
     private IntReactiveProperty _gameTimer;
     public IReadOnlyReactiveProperty<int> GameTimer => _gameTimer;
 
-    public RoomData RoomSetting;
-    public PlayerData MasterUser => RoomSetting.Players[0];
+    public SyncRoomData RoomSetting;
+    public SyncPlayerData MasterUser => RoomSetting.Players[0];
 
     private PlayerModel[] _players;
     public PlayerModel[] Players => _players;
@@ -34,7 +34,7 @@ public class RoomModel : UdonBehaviour{
     private SyncObjectPool _syncObjectPool;
     public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjectPool.SyncObjects;
 
-	public void Initialize(RoomData data)
+	public void Initialize(SyncRoomData data)
     {
         RoomSetting = data;
 

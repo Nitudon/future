@@ -24,7 +24,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
         return model;
     }
 
-    public SyncObjectModel<SyncObjectData> Create(UserData owner)
+    public SyncObjectModel<SyncObjectData> Create(SyncPlayerData owner)
     {
         var model = Rent();
         string id = Guid.NewGuid().ToString();

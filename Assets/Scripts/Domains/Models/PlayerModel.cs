@@ -18,7 +18,7 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     private BoolReactiveProperty _onActivated = new BoolReactiveProperty(false);
     public IReadOnlyReactiveProperty<bool> OnActivated => _onActivated;
 
-    public static PlayerModel CreateFromPlayerData(PlayerData user, Transform transform, bool mine = false)
+    public static PlayerModel CreateFromPlayerData(SyncPlayerData user, Transform transform, bool mine = false)
     {
         var primitive = Resources.Load<PlayerModel>(PRIMITIVE_PATH);
         var player = Instantiate<PlayerModel>(primitive ,transform);
