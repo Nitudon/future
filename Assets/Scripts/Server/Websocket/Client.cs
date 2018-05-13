@@ -40,6 +40,21 @@ namespace AGS.Websocket
             await new WaitUntil(() => _connection.IsAlive);
         }
 
+        public async Task DisconnectAsync()
+        {
+
+            if (_connection == null)
+            {
+                InstantLog.StringLogError("Missing websocket");
+                return;
+            }
+
+            HandleFunc();
+
+            _connection.Close();
+            await new WaitUntil(() => !_connection.IsAlive);
+        }
+
         public void SendMessage(string message)
         {
             if (_connection == null || _connection.IsConnected == false)
