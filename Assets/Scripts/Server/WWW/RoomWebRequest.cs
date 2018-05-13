@@ -9,7 +9,7 @@ namespace AGS.WebRequest
 {
     public class RoomWebRequest
     {
-        private static readonly string URL_DOMAIN = "localhost:8080";
+        private static readonly string URL_DOMAIN = "localhost:3000";
         
         public static async Task<SyncRoomData> FetchSyncRoomDataAsync(string id)
         {
@@ -20,7 +20,6 @@ namespace AGS.WebRequest
         {
             return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/room/join");
         }
-
     }
 }
 

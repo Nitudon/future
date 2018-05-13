@@ -41,7 +41,6 @@ public class SyncSubject : MonoBehaviour {
 
     private void ReceiveSyncData(object sender, MessageEventArgs e)
     {
-        Debug.Log("receive");
         var data = JsonUtility.FromJson<SyncMessage>(e.Data);
         switch(data.SyncType)
         {
@@ -55,10 +54,5 @@ public class SyncSubject : MonoBehaviour {
                 _playerSynchronizer.ReceiveData(data.Message);
                 return;
         }
-    }
-
-    private void OnDestroy()
-    {
-        _websocketClient.DisconnectAsync();
     }
 }

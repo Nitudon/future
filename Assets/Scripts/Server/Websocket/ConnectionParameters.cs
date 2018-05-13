@@ -2,7 +2,7 @@
 
     public static class ConnectionParameters{
 
-        public static readonly string WS_CONNECTIONADDRESS = "ws://localhost:8080/ws/connect";
+        public static readonly string WS_CONNECTIONADDRESS = "ws://localhost:3000/ws/connect";
 
     }
 }
