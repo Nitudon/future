@@ -7,15 +7,30 @@ using UdonLib.Commons;
 
 namespace AGS.WebRequest
 {
+    /// <summary>
+    /// ルーム周りのWebリクエスト
+    /// </summary>
     public class RoomWebRequest
     {
+        /// <summary>
+        /// リクエストするサーバードメイン
+        /// </summary>
         private static readonly string URL_DOMAIN = "localhost:3000";
         
+        /// <summary>
+        /// ルームデータのフェッチリクエスト
+        /// </summary>
+        /// <param name="id">サーバー上のルーム識別ID</param>
+        /// <returns>対象となるルームの同期データ</returns>
         public static async Task<SyncRoomData> FetchSyncRoomDataAsync(string id)
         {
             return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/?room_id={id}");
         }
 
+        /// <summary>
+        /// ルームの入室リクエスト
+        /// </summary>
+        /// <returns>入室するルームの同期データ</returns>
         public static async Task<SyncRoomData> JoinRoomAsync()
         {
             return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/room/join");

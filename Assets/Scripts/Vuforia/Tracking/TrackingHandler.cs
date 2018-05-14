@@ -2,10 +2,16 @@
 using UniRx;
 using Vuforia;
 
+/// <summary>
+/// VuforiaのARカメラのトラッキングイベントハンドラー
+/// </summary>
 public class TrackingHandler : MonoBehaviour, ITrackableEventHandler{
 
     #region MEMBER_VARIABLES
-
+    
+    /// <summary>
+    /// マーカーの識別イベント
+    /// </summary>
     private BoolReactiveProperty _onTrackingFoundStatusChanged = new BoolReactiveProperty(false);
     public IReadOnlyReactiveProperty<bool> OnTrackingFoundStatusChanged => _onTrackingFoundStatusChanged;
 

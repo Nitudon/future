@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// プレイヤーのUIビュー
+/// </summary>
 public class GamePlayerUI : MonoBehaviour {
-
+    
     [SerializeField]
     private Text _hpUI;
 
