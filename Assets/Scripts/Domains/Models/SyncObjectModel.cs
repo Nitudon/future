@@ -10,7 +10,7 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
     protected ReactiveProperty<Vector3> _syncPosition = new ReactiveProperty<Vector3>(Vector3.zero);
     public IReadOnlyReactiveProperty<Vector3> SyncPosition => _syncPosition;
 
-    protected string _id;
+    protected string _id = Guid.NewGuid().ToString();
     public string Id => _id;
 
     protected SyncPlayerData _owner;

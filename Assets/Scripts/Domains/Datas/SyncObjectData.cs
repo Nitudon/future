@@ -2,6 +2,7 @@
 
 namespace AGS.Domains{
 
+    [System.Serializable]
     public enum SyncType
     {
         Room = 0,

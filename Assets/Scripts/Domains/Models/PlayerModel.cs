@@ -9,8 +9,11 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
 {
     private static readonly string PRIMITIVE_PATH = "Prefabs/GamePlayer";
 
-    private new int _id;
-    public new int Id => _id;
+    private int _playerId;
+    public int PlayerId => _playerId;
+
+    private string _name;
+    public string Name => _name;
 
     private FloatReactiveProperty _playerHp = new FloatReactiveProperty(100);
     public IReadOnlyReactiveProperty<float> PlayerHp => _playerHp;
@@ -20,11 +23,11 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
 
     public static PlayerModel CreateFromPlayerData(SyncPlayerData user, Transform transform, bool mine = false)
     {
-        Debug.Log(user.Id);
         var primitive = Resources.Load<PlayerModel>(PRIMITIVE_PATH);
         var player = Instantiate<PlayerModel>(primitive ,transform);
 
-        player._id = user.PlayerId;
+        player._playerId = user.PlayerId;
+        player._name = user.Name;
         player._playerHp = new FloatReactiveProperty(user.Hp);
         player._isMine = mine;
         return player;
@@ -33,7 +36,9 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     public SyncPlayerData GetSyncModelData()
     {
         var data = new SyncPlayerData();
-        data.PlayerId = _id;
+        data.Id = _id;
+        data.PlayerId = _playerId;
+        data.Name = _name;
         data.PositionX = _syncPosition.Value.x;
         data.PositionY = _syncPosition.Value.y;
         data.PositionZ = _syncPosition.Value.z;

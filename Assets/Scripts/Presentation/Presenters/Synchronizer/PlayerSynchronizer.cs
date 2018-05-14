@@ -32,7 +32,7 @@ public class PlayerSynchronizer : UdonBehaviour {
     public void ReceiveData(string message)
     {
         var data = JsonUtility.FromJson<SyncPlayerData>(message);
-
+        InstantLog.ObjectLog(data);
         if(data.PlayerId >_roomModel.Players.Length - 1 || data.PlayerId < 0 || _roomModel.Players == null)
         {
             Debug.LogError("Invalid Sync Data for Player");
