@@ -4,6 +4,7 @@ using AGS.Domains;
 using UnityEngine;
 using UniRx;
 using UdonLib.Commons;
+using UdonObservable.Commons;
 using Zenject;
 
 /// <summary>
@@ -53,6 +54,12 @@ public class RoomModel : UdonBehaviour{
     public SyncPlayerData MasterUser => RoomSetting.Players[0];
 
     /// <summary>
+    /// オーナー判定
+    /// </summary>
+    private bool _isMaster;
+    public bool IsMaster => _isMaster;
+
+    /// <summary>
     /// 参加しているプレイヤーモデル
     /// </summary>
     private PlayerModel[] _players;
@@ -76,10 +83,30 @@ public class RoomModel : UdonBehaviour{
         _players.LastOrDefault().StartSyncPosition();
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
+        // 自分しかいなければ自分がマスター
+        _isMaster = _players.Length == 1;
+
         //_trackingHandler.OnTrackingFoundStatusChanged
         //    .Where(status => status)
         //    .Subscribe(_ => ActivateRoom())
         //    .AddTo(this);
+    }
+
+    /// <summary>
+    /// 同期ルームデータの取得
+    /// </summary>
+    /// <returns>ルームデータ</returns>
+    public SyncRoomData GetSyncRoomData()
+    {
+        var data = new SyncRoomData();
+        data.Time = _gameTimer.Value;
+
+        return data;
+    }
+
+    public void AffectSyncRoomData(SyncRoomData data)
+    {
+        _gameTimer.Value = (int)data.Time;
     }
 
     /// <summary>
@@ -95,6 +122,6 @@ public class RoomModel : UdonBehaviour{
     /// </summary>
     public void SetGameTimer()
     {
-        //_gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.TotalGameTime) as IntReactiveProperty;
+        _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.Time) as IntReactiveProperty;
     }
 }

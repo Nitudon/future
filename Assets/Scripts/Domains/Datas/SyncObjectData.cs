@@ -22,6 +22,7 @@ namespace AGS.Domains
 
         // プレイヤー
         Player,
+
     }
 
     /// <summary>
