@@ -34,7 +34,9 @@ public class RoomSynchronizer: MonoBehaviour {
         //自身が操作するプレイヤーに関してルームのデータを同期
         if(_roomModel.IsMaster)
         {
-            _roomModel.GameTimer.Subscribe(_ => _syncSubject.SendSyncData(SyncType.Room, JsonUtility.ToJson(_roomModel.GetSyncRoomData()))).AddTo(_roomModel);
+            _roomModel.RoomPlayerJoinList.ObserveAdd().Subscribe(_ => _syncSubject.SendSyncData(SyncType.Room, JsonUtility.ToJson(_roomModel.GetSyncRoomData()))).AddTo(_disposable);
+            _roomModel.RoomPlayerJoinList.ObserveRemove().Subscribe(_ => _syncSubject.SendSyncData(SyncType.Room, JsonUtility.ToJson(_roomModel.GetSyncRoomData()))).AddTo(_disposable);
+            _roomModel.GameTimer.Subscribe(_ => _syncSubject.SendSyncData(SyncType.Room, JsonUtility.ToJson(_roomModel.GetSyncRoomData()))).AddTo(_disposable);
         }
 
     } 

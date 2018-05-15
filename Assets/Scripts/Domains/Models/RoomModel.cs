@@ -66,6 +66,12 @@ public class RoomModel : UdonBehaviour{
     public PlayerModel[] Players => _players;
 
     /// <summary>
+    /// 試合までの参加プレイヤーの入室リスト
+    /// </summary>
+    private ReactiveCollection<PlayerModel> _roomPlayerJoinList = new ReactiveCollection<PlayerModel>();
+    public IReactiveCollection<PlayerModel> RoomPlayerJoinList => _roomPlayerJoinList;
+
+    /// <summary>
     /// 同期するオブジェクト群と生成管理システム
     /// </summary>
     private SyncObjectPool _syncObjectPool;
@@ -79,8 +85,7 @@ public class RoomModel : UdonBehaviour{
     {
         RoomSetting = data;
 
-        _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();
-        _players.LastOrDefault().StartSyncPosition();
+        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)));
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
         // 自分しかいなければ自分がマスター
@@ -96,11 +101,21 @@ public class RoomModel : UdonBehaviour{
     /// 同期ルームデータの取得
     /// </summary>
     /// <returns>ルームデータ</returns>
-    public SyncRoomData GetSyncRoomData()
+    public SyncRoomData GetSyncGameRoomData()
     {
         var data = new SyncRoomData();
         data.Time = _gameTimer.Value;
+        return data;
+    }
 
+    /// <summary>
+    /// 同期ルームデータの取得
+    /// </summary>
+    /// <returns>ルームデータ</returns>
+    public SyncRoomData GetSyncJoinRoomData()
+    {
+        var data = new SyncRoomData();
+        data.Players = _roomPlayerJoinList.Select(player => player.GetSyncModelData()).ToArray();
         return data;
     }
 
@@ -109,19 +124,31 @@ public class RoomModel : UdonBehaviour{
         _gameTimer.Value = (int)data.Time;
     }
 
+    private void JoinRoom(SyncPlayerData playerData)
+    {
+        _roomPlayerJoinList.Add(PlayerModel.CreateFromPlayerData(playerData, _syncObjectRoot));
+    }
+
+    private void LeaveRoom(int playerId)
+    {
+        _roomPlayerJoinList.RemoveAt(playerId);
+        if(_roomPlayerJoinList.ElementAtOrDefault(0).IsMine)
+        {
+            _isMaster = true;
+        }
+    }
+
     /// <summary>
     /// ルームのアクティベート
     /// </summary>
     private void ActivateRoom()
     {
+        _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();
+        _players.LastOrDefault().StartSyncPosition();
         _players.ForEach(player => player.SwitchActive(true));
-    }
 
-    /// <summary>
-    /// ゲーム内タイマーの初期化と運用開始
-    /// </summary>
-    public void SetGameTimer()
-    {
+        // ゲーム内タイマーの初期化と運用開始
         _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.Time) as IntReactiveProperty;
     }
+
 }
