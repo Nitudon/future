@@ -34,16 +34,19 @@ public class PlayerPresenter : MonoBehaviour, System.IDisposable {
     /// </summary>
     public void Initialize()
     {
-        //同期データの位置に基づく座標移動
-        _gamePlayerModel.SyncPosition
-            .Subscribe(_gamePlayerView.SyncPosition)
-            .AddTo(_disposable);
 
         // 操作対象のプレイヤーに関してのUI処理
         if (_gamePlayerModel.IsMine)
         {
             _gamePlayerModel.PlayerHp
                 .Subscribe(_gamePlayerUI.UpdatePlayerUI)
+                .AddTo(_disposable);
+        }
+        else
+        {
+            //同期データの位置に基づく座標移動
+            _gamePlayerModel.SyncPosition
+                .Subscribe(_gamePlayerView.SyncPosition)
                 .AddTo(_disposable);
         }
     
