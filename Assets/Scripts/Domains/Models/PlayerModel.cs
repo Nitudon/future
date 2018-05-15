@@ -37,6 +37,12 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     public IReadOnlyReactiveProperty<bool> OnActivated => _onActivated;
 
     /// <summary>
+    /// 自身の操作するプレイヤー
+    /// </summary>
+    private static PlayerModel _myPlayer;
+    public static PlayerModel MyPlayer => _myPlayer;
+
+    /// <summary>
     /// プレイヤーの生成
     /// 同期すべきプレイヤーデータに基づいて生成
     /// </summary>
@@ -55,6 +61,12 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
         player._name = user.Name;
         player._playerHp = new FloatReactiveProperty(user.Hp);
         player._isMine = isMine;
+
+        if(isMine)
+        {
+            _myPlayer = player;
+        }
+
         return player;
     }
 
