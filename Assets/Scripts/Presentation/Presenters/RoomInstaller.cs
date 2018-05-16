@@ -10,5 +10,8 @@ public class RoomInstaller : MonoInstaller {
     {
         Container.Bind<RoomModel>().AsSingle();
         Container.Bind<PlayerModel.PlayerFactory>().AsSingle().WithArguments(_playerPrefab);
+        Container.Bind<RoomSynchronizer>().AsSingle();
+        Container.Bind<PlayerSynchronizer>().AsSingle();
+        Container.Bind<ObjectSynchronizer>().AsSingle();
     }
 }

@@ -3,6 +3,7 @@ using AGS.Domains;
 using UnityEngine;
 using UniRx;
 using UdonLib.Commons;
+using Zenject;
 
 /// <summary>
 /// プレイヤーの同期処理を管理するクラス
@@ -12,13 +13,13 @@ public class PlayerSynchronizer : UdonBehaviour {
     /// <summary>
     /// サーバーとの同期の送受信プロキシ
     /// </summary>
-    [SerializeField]
+    [Inject]
     private SyncSubject _syncSubject;
 
     /// <summary>
     /// 同期するルームモデル
     /// </summary>
-    [SerializeField]
+    [Inject]
     private RoomModel _roomModel;
 
     /// <summary>

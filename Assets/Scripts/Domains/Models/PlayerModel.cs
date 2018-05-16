@@ -122,6 +122,9 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     }
 
     #region [Factory]
+    /// <summary>
+    /// PlayerのFactory、DI処理
+    /// </summary>
     public class PlayerFactory : IFactory<SyncPlayerData, Transform, bool, PlayerModel>
     {
         [Inject]

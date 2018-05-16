@@ -3,6 +3,7 @@ using AGS.Domains;
 using UnityEngine;
 using UniRx;
 using UdonLib.Commons;
+using Zenject;
 
 /// <summary>
 /// ルームの同期処理の管理を行うクラス
@@ -12,13 +13,13 @@ public class RoomSynchronizer: MonoBehaviour {
     /// <summary>
     /// サーバーとの同期の送受信プロキシ
     /// </summary>
-    [SerializeField]
+    [Inject]
     private SyncSubject _syncSubject;
 
     /// <summary>
     /// 同期するルームモデル
     /// </summary>
-    [SerializeField]
+    [Inject]
     private RoomModel _roomModel;
 
     /// <summary>

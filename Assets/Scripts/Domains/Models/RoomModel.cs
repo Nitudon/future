@@ -18,13 +18,16 @@ public class RoomModel : UdonBehaviour{
     [Inject]
     private SyncSubject _syncSubject;
 
+    /// <summary>
+    /// プレイヤーのDIファクトリー
+    /// </summary>
     [Inject]
     private PlayerModel.PlayerFactory _playerFactory;
 
     /// <summary>
     /// ARカメラのトラッキングイベントのハンドラー
     /// </summary>
-    [SerializeField]
+    [Inject]
     private TrackingHandler _trackingHandler;
 
     /// <summary>
