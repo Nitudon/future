@@ -1,9 +1,14 @@
 ﻿using Zenject;
+using UnityEngine;
 
 public class RoomInstaller : MonoInstaller {
 
+    [SerializeField]
+    private GameObject _playerPrefab;
+
     public override void InstallBindings()
     {
-
+        Container.Bind<RoomModel>().AsSingle();
+        Container.Bind<PlayerModel.PlayerFactory>().AsSingle().WithArguments(_playerPrefab);
     }
 }

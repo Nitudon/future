@@ -148,4 +148,8 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
             yield return null;
         }
     }
+
+    #region [Factory]
+    public class PlayerFactory : GameObjectFactory{ }
+    #endregion
 }
