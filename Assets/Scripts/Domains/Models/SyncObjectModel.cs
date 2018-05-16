@@ -107,7 +107,7 @@ public class SyncObjectModel<T> : UdonBehaviour where T : SyncObjectData{
     /// 同期用のモデルデータ変更検知
     /// </summary>
     /// <returns></returns>
-    private IEnumerator UpdateCoroutine()
+    protected virtual IEnumerator UpdateCoroutine()
     {
         while (IsMine)
         {

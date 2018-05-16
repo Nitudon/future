@@ -1,12 +1,20 @@
 ﻿using AGS.Domains;
 using UnityEngine;
 using UniRx;
+using Zenject;
+using System.Collections;
 
 /// <summary>
 /// プレイヤーの同期モデル
 /// </summary>
 public class PlayerModel : SyncObjectModel<SyncPlayerData>
 {
+    [Inject]
+    private Camera _playerCamera;
+
+    private Transform _playerTransform => _cachedTransform ?? (_cachedTransform = _playerCamera.GetComponent<Transform>());
+    private Transform _cachedTransform;
+
     /// <summary>
     /// プレイヤープレハブのパス
     /// </summary>
@@ -129,6 +137,15 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
         else
         {
             Debug.LogError("Invalid damage for player");
+        }
+    }
+
+    protected override IEnumerator UpdateCoroutine()
+    {
+        while (IsMine)
+        {
+            _syncPosition.Value = _playerCamera.transform.position;
+            yield return null;
         }
     }
 }
