@@ -51,34 +51,6 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     public static PlayerModel MyPlayer => _myPlayer;
 
     /// <summary>
-    /// プレイヤーの生成
-    /// 同期すべきプレイヤーデータに基づいて生成
-    /// </summary>
-    /// <param name="user">ベースとなるプレイヤーデータ</param>
-    /// <param name="transform">プレイヤーオブジェクトの親ルート</param>
-    /// <param name="isMine">自身の操作オブジェクトであるかどうかのフラグ</param>
-    /// <returns>プレイヤーオブジェクト</returns>
-    public static PlayerModel CreateFromPlayerData(SyncPlayerData user, Transform transform, bool isMine = false)
-    {
-        // ベースプレハブからプレイヤーオブジェクトを読みだして指定ルートに生成
-        var primitive = Resources.Load<PlayerModel>(PRIMITIVE_PATH);
-        var player = Instantiate<PlayerModel>(primitive ,transform);
-
-        // プレイヤーデータを流し込む
-        player._playerId = user.PlayerId;
-        player._name = user.Name;
-        player._playerHp = new FloatReactiveProperty(user.Hp);
-        player._isMine = isMine;
-
-        if(isMine)
-        {
-            _myPlayer = player;
-        }
-
-        return player;
-    }
-
-    /// <summary>
     /// 同期プレイヤーデータの取得
     /// </summary>
     /// <returns>プレイヤーデータ</returns>
@@ -150,6 +122,32 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     }
 
     #region [Factory]
-    public class PlayerFactory : GameObjectFactory{ }
+    public class PlayerFactory : IFactory<SyncPlayerData, Transform, bool, PlayerModel>
+    {
+        [Inject]
+        private DiContainer _container;
+
+        [Inject]
+        private UnityEngine.Object _prefab;
+
+        public PlayerModel Create(SyncPlayerData data, Transform root, bool isMine = false)
+        {
+            var player = _container.InstantiatePrefabForComponent<PlayerModel>(_prefab);
+
+            // プレイヤーデータを流し込む
+            player._playerId = data.PlayerId;
+            player._name = data.Name;
+            player._playerHp = new FloatReactiveProperty(data.Hp);
+            player._isMine = isMine;
+
+            if (isMine)
+            {
+                _myPlayer = player;
+            }
+
+            return player;
+        }
+    
+    }
     #endregion
 }

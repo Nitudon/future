@@ -13,16 +13,19 @@ using Zenject;
 public class RoomModel : UdonBehaviour{
 
     /// <summary>
-    /// ARカメラのトラッキングイベントのハンドラー
-    /// </summary>
-    [Inject]
-    private TrackingHandler _trackingHandler;
-
-    /// <summary>
     /// 同期データの送受信プロキシ
     /// </summary>
     [Inject]
     private SyncSubject _syncSubject;
+
+    [Inject]
+    private PlayerModel.PlayerFactory _playerFactory;
+
+    /// <summary>
+    /// ARカメラのトラッキングイベントのハンドラー
+    /// </summary>
+    [SerializeField]
+    private TrackingHandler _trackingHandler;
 
     /// <summary>
     /// 同期オブジェクトの親ルート
@@ -85,7 +88,7 @@ public class RoomModel : UdonBehaviour{
     {
         RoomSetting = data;
 
-        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)));
+        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot)));
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
         // 自分しかいなければ自分がマスター
@@ -126,7 +129,7 @@ public class RoomModel : UdonBehaviour{
 
     private void JoinRoom(SyncPlayerData playerData)
     {
-        _roomPlayerJoinList.Add(PlayerModel.CreateFromPlayerData(playerData, _syncObjectRoot));
+        _roomPlayerJoinList.Add(_playerFactory.Create(playerData, _syncObjectRoot));
     }
 
     private void LeaveRoom(int playerId)
@@ -143,7 +146,7 @@ public class RoomModel : UdonBehaviour{
     /// </summary>
     private void ActivateRoom()
     {
-        _players = RoomSetting.Players.Select(player => PlayerModel.CreateFromPlayerData(player, _syncPlayerRoot)).ToArray();
+        _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot)).ToArray();
         _players.LastOrDefault().StartSyncPosition();
         _players.ForEach(player => player.SwitchActive(true));
 
