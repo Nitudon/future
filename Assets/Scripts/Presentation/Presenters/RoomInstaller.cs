@@ -4,15 +4,22 @@ using AGS.Domains;
 
 public class RoomInstaller : MonoInstaller {
 
+    public override void InstallBindings()
+    {
+        Container.Bind<GameRulePresenter>().AsSingle();
+        Container.Bind<RoomSynchronizer>().AsSingle();
+        Container.Bind<PlayerSynchronizer>().AsSingle();
+        Container.Bind<ObjectSynchronizer>().AsSingle();
+    }
+}
+
+public class InstacingInstaller : MonoInstaller<InstacingInstaller>
+{
     [SerializeField]
     private GameObject _playerPrefab;
 
     public override void InstallBindings()
     {
-        Container.Bind<GameRulePresenter>().AsSingle();
-        Container.BindFactory<SyncPlayerData, Transform, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
-        Container.Bind<RoomSynchronizer>().AsSingle();
-        Container.Bind<PlayerSynchronizer>().AsSingle();
-        Container.Bind<ObjectSynchronizer>().AsSingle();
+        Container.Bind<PlayerModel>().FromFactory<SyncPlayerData, Transform, bool, PlayerModel.PlayerFactory>();
     }
 }
