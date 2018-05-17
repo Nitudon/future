@@ -81,6 +81,7 @@ public class RoomModel : UdonBehaviour{
     /// 同期するオブジェクト群と生成管理システム
     /// </summary>
     private SyncObjectPool _syncObjectPool;
+    public SyncObjectPool SyncObjectPool => _syncObjectPool;
     public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjectPool.SyncObjects;
 
     /// <summary>
