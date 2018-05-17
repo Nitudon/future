@@ -17,4 +17,30 @@ public class SyncBulletModel : SyncObjectModel<SyncObjectData> {
         player.DamageHp(_damage);
         _roomModel.SyncObjectPool.Destroy(_id);
     }
+
+    #region [Factory]
+    /// <summary>
+    /// BulletのFactory、DI処理
+    /// </summary>
+    public class BulletFactory : IFactory<SyncObjectData, Transform, bool, SyncBulletModel>
+    {
+        [Inject]
+        private DiContainer _container;
+
+        [Inject]
+        private UnityEngine.Object _prefab;
+
+        public SyncBulletModel Create(SyncObjectData data, Transform root, bool isMine = false)
+        {
+            var bullet = _container.InstantiatePrefabForComponent<SyncBulletModel>(_prefab);
+
+            // プレイヤーデータを流し込む
+            bullet._id = data.Id;
+            bullet._isMine = isMine;
+
+            return bullet;
+        }
+
+    }
+    #endregion
 }
