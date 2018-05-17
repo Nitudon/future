@@ -1,5 +1,6 @@
 ﻿using Zenject;
 using UnityEngine;
+using AGS.Domains;
 
 public class RoomInstaller : MonoInstaller {
 
@@ -8,8 +9,8 @@ public class RoomInstaller : MonoInstaller {
 
     public override void InstallBindings()
     {
-        Container.Bind<RoomModel>().AsSingle();
-        Container.Bind<PlayerModel.PlayerFactory>().AsSingle().WithArguments(_playerPrefab);
+        Container.Bind<GameRulePresenter>().AsSingle();
+        Container.BindFactory<SyncPlayerData, Transform, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
         Container.Bind<RoomSynchronizer>().AsSingle();
         Container.Bind<PlayerSynchronizer>().AsSingle();
         Container.Bind<ObjectSynchronizer>().AsSingle();

@@ -11,13 +11,13 @@ public class GameRulePresenter : MonoBehaviour {
     /// <summary>
     /// 同期するルームモデル
     /// </summary>
-    [SerializeField]
+    [Inject]
     private RoomModel _roomModel;
 
     /// <summary>
     /// サーバーとの同期データの送受信を行うプロキシ
     /// </summary>
-    [SerializeField]
+    [Inject]
     private SyncSubject _syncSubject;
 
     private void Start()
