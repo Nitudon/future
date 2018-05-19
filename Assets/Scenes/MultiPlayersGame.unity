@@ -245,7 +245,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1221762548}
-  - component: {fileID: 1221762549}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -266,17 +265,6 @@ Transform:
   m_Father: {fileID: 1384612283}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1221762549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1221762547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ce74e4fcaba8246b44e8aab3b7db9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1225512253
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384612283}
   - component: {fileID: 1384612282}
+  - component: {fileID: 1384612284}
   m_Layer: 0
   m_Name: RoomRoot
   m_TagString: Untagged
@@ -520,6 +509,22 @@ Transform:
   m_Father: {fileID: 1522779037}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1384612284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384612281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1384612282}
+  _identifier: 
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1405057548
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1708111693
 Transform:
   m_ObjectHideFlags: 0
@@ -813,6 +818,7 @@ GameObject:
   - component: {fileID: 1741501008}
   - component: {fileID: 1741501009}
   - component: {fileID: 1741501011}
+  - component: {fileID: 1741501012}
   m_Layer: 0
   m_Name: Synchronizer
   m_TagString: Untagged
@@ -880,6 +886,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c8301968abb31449e239b622398277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1741501012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741501006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1741501010}
+  _identifier: 
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1751422912
 GameObject:
   m_ObjectHideFlags: 0

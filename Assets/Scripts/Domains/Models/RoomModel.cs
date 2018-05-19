@@ -98,10 +98,10 @@ public class RoomModel : UdonBehaviour{
         // 自分しかいなければ自分がマスター
         _isMaster = _players.Length == 1;
 
-        //_trackingHandler.OnTrackingFoundStatusChanged
-        //    .Where(status => status)
-        //    .Subscribe(_ => ActivateRoom())
-        //    .AddTo(this);
+        _trackingHandler.OnTrackingFoundStatusChanged
+            .Where(status => status)
+            .Subscribe(_ => ActivateRoom())
+            .AddTo(this);
     }
 
     /// <summary>
