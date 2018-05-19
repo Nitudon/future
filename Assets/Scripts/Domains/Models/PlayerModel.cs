@@ -50,6 +50,21 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     private static PlayerModel _myPlayer;
     public static PlayerModel MyPlayer => _myPlayer;
 
+    [Inject]
+    public void Construct(SyncPlayerData data, Transform root, bool isMine = false)
+    {
+        // プレイヤーデータを流し込む
+        _playerId = data.PlayerId;
+        _name = data.Name;
+        _playerHp = new FloatReactiveProperty(data.Hp);
+        _isMine = isMine;
+
+        if (isMine)
+        {
+            _myPlayer = this;
+        }
+    }
+
     /// <summary>
     /// 同期プレイヤーデータの取得
     /// </summary>
@@ -125,31 +140,8 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     /// <summary>
     /// PlayerのFactory、DI処理
     /// </summary>
-    public class PlayerFactory : IFactory<SyncPlayerData, Transform, bool, PlayerModel>
+    public class PlayerFactory : Factory<SyncPlayerData, Transform, bool, PlayerModel>
     {
-        [Inject]
-        private DiContainer _container;
-
-        [Inject]
-        private UnityEngine.Object _prefab;
-
-        public PlayerModel Create(SyncPlayerData data, Transform root, bool isMine = false)
-        {
-            var player = _container.InstantiatePrefabForComponent<PlayerModel>(_prefab);
-
-            // プレイヤーデータを流し込む
-            player._playerId = data.PlayerId;
-            player._name = data.Name;
-            player._playerHp = new FloatReactiveProperty(data.Hp);
-            player._isMine = isMine;
-
-            if (isMine)
-            {
-                _myPlayer = player;
-            }
-
-            return player;
-        }
     
     }
     #endregion

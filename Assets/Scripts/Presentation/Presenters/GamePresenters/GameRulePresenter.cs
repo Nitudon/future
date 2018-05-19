@@ -34,8 +34,11 @@ public class GameRulePresenter : MonoBehaviour {
     {
         // 非同期で依存関係を解決しながら各オブジェクトを初期化
         var room = await RoomWebRequest.JoinRoomAsync();
+        Debug.Log("get");
         _roomModel.Initialize(room);
+        Debug.Log("room");
         await _syncSubject.InitializeAsync();
+        Debug.Log("sync");
     }
 
 }

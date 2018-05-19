@@ -92,16 +92,16 @@ public class RoomModel : UdonBehaviour{
     {
         RoomSetting = data;
 
-        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot)));
+        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot, player.PlayerId == RoomSetting.Players.Length - 1)));
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
         // 自分しかいなければ自分がマスター
         _isMaster = _players.Length == 1;
 
-        _trackingHandler.OnTrackingFoundStatusChanged
-            .Where(status => status)
-            .Subscribe(_ => ActivateRoom())
-            .AddTo(this);
+        //_trackingHandler.OnTrackingFoundStatusChanged
+        //    .Where(status => status)
+        //    .Subscribe(_ => ActivateRoom())
+        //    .AddTo(this);
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ public class RoomModel : UdonBehaviour{
 
     private void JoinRoom(SyncPlayerData playerData)
     {
-        _roomPlayerJoinList.Add(_playerFactory.Create(playerData, _syncObjectRoot));
+        _roomPlayerJoinList.Add(_playerFactory.Create(playerData, _syncObjectRoot, playerData.PlayerId == RoomSetting.Players.Length - 1));
     }
 
     private void LeaveRoom(int playerId)
@@ -150,7 +150,7 @@ public class RoomModel : UdonBehaviour{
     /// </summary>
     private void ActivateRoom()
     {
-        _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot)).ToArray();
+        _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot, player.PlayerId == RoomSetting.Players.Length - 1)).ToArray();
         _players.LastOrDefault().StartSyncPosition();
         _players.ForEach(player => player.SwitchActive(true));
 

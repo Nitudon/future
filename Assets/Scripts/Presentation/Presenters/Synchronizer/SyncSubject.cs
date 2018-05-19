@@ -81,6 +81,7 @@ public class SyncSubject : MonoBehaviour {
                 return;
 
             case SyncType.Object:
+                _objectSynchronizer.ReceiveData(data.Message);
                 return;
 
             case SyncType.Player:

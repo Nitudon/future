@@ -194,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39655e9ed4f60d54483cd0c720e1d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 1404164663872438, guid: dd095bac6d1027e4fbfc594ba216d369,
+    type: 2}
 --- !u!1 &959353603
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7878fc0e1cb28df49974a4b7ad8b2943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _syncSubject: {fileID: 1741501010}
+  _trackingHandler: {fileID: 959353605}
   _syncObjectRoot: {fileID: 1425066221}
   _syncPlayerRoot: {fileID: 1221762548}
   _gameTimer:
@@ -747,8 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29361ecffa435164fb3948a116639ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomModel: {fileID: 1384612282}
-  _syncSubject: {fileID: 1741501010}
 --- !u!1 &1708111692
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,8 +855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2519623cad09c5747bee68c42c63fe3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _syncSubject: {fileID: 1741501010}
-  _roomModel: {fileID: 1384612282}
 --- !u!114 &1741501010
 MonoBehaviour:
   m_ObjectHideFlags: 0
