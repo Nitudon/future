@@ -77,6 +77,7 @@ public class SyncSubject : MonoBehaviour {
         switch(data.SyncType)
         {
             case SyncType.Room:
+                _roomSynchronizer.ReceiveData(data.Message);
                 return;
 
             case SyncType.Object:
