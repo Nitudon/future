@@ -5,15 +5,19 @@ using AGS.Domains;
 public class RoomInstaller : MonoInstaller {
 
     [SerializeField]
-    private GameObject _playerPrefab;
+    private PlayerModel _playerPrefab;
+
+    [SerializeField]
+    private Transform _playerParent;
 
     public override void InstallBindings()
     {
+        Container.Bind<RoomModel>().AsSingle();
         Container.Bind<GameRulePresenter>().AsSingle();
         Container.Bind<RoomSynchronizer>().AsSingle();
         Container.Bind<PlayerSynchronizer>().AsSingle();
         Container.Bind<ObjectSynchronizer>().AsSingle();
 
-        Container.BindFactory<SyncPlayerData, Transform, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
+        //Container.BindIFactory<SyncPlayerData, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab).UnderTransform(_playerParent);
     }
 }

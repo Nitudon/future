@@ -19,12 +19,6 @@ public class RoomModel : UdonBehaviour{
     private SyncSubject _syncSubject;
 
     /// <summary>
-    /// プレイヤーのDIファクトリー
-    /// </summary>
-    [SerializeField]
-    private PlayerModel.PlayerFactory _playerFactory;
-
-    /// <summary>
     /// ARカメラのトラッキングイベントのハンドラー
     /// </summary>
     [SerializeField]
@@ -85,6 +79,17 @@ public class RoomModel : UdonBehaviour{
     public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjectPool.SyncObjects;
 
     /// <summary>
+    /// プレイヤーのDIファクトリー
+    /// </summary>
+    private PlayerModel.PlayerFactory _playerFactory;
+
+    [Inject]
+    public void Construct(PlayerModel.PlayerFactory factory)
+    {
+        _playerFactory = factory;
+    }
+
+    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="data">同期するルームデータ</param>
@@ -92,7 +97,7 @@ public class RoomModel : UdonBehaviour{
     {
         RoomSetting = data;
 
-        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot, player.PlayerId == RoomSetting.Players.Length - 1)));
+        _roomPlayerJoinList = new ReactiveCollection<PlayerModel>(RoomSetting.Players.Select(player => _playerFactory.Create(player, player.PlayerId == RoomSetting.Players.Length - 1)));
         _syncObjectPool = new SyncObjectPool(_syncObjectRoot);
 
         // 自分しかいなければ自分がマスター
@@ -133,7 +138,7 @@ public class RoomModel : UdonBehaviour{
 
     private void JoinRoom(SyncPlayerData playerData)
     {
-        _roomPlayerJoinList.Add(_playerFactory.Create(playerData, _syncObjectRoot, playerData.PlayerId == RoomSetting.Players.Length - 1));
+        _roomPlayerJoinList.Add(_playerFactory.Create(playerData, playerData.PlayerId == RoomSetting.Players.Length - 1));
     }
 
     private void LeaveRoom(int playerId)
@@ -150,7 +155,7 @@ public class RoomModel : UdonBehaviour{
     /// </summary>
     private void ActivateRoom()
     {
-        _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, _syncPlayerRoot, player.PlayerId == RoomSetting.Players.Length - 1)).ToArray();
+        _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, player.PlayerId == RoomSetting.Players.Length - 1)).ToArray();
         _players.LastOrDefault().StartSyncPosition();
         _players.ForEach(player => player.SwitchActive(true));
 
