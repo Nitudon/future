@@ -76,7 +76,6 @@ public class RoomModel : UdonBehaviour{
     /// </summary>
     private SyncObjectPool _syncObjectPool;
     public SyncObjectPool SyncObjectPool => _syncObjectPool;
-    public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjectPool.SyncObjects;
 
     /// <summary>
     /// プレイヤーのDIファクトリー

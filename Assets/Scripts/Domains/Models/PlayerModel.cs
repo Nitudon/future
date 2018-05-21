@@ -12,6 +12,9 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     [Inject]
     private Camera _playerCamera;
 
+    [Inject]
+    private RoomModel _roomModel;
+
     private Transform _playerTransform => _cachedTransform ?? (_cachedTransform = _playerCamera.GetComponent<Transform>());
     private Transform _cachedTransform;
 
@@ -51,6 +54,11 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     public static PlayerModel MyPlayer => _myPlayer;
 
     /// <summary>
+    /// bulletの生成クラス
+    /// </summary>
+    private SyncBulletCreator _bulletCreator = new SyncBulletCreator();
+
+    /// <summary>
     /// 同期プレイヤーデータの取得
     /// </summary>
     /// <returns>プレイヤーデータ</returns>
@@ -86,6 +94,11 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
     {
         //AffectSyncObjectData(data);
         _playerHp.Value = data.Hp;
+    }
+
+    public void CreateBullet()
+    {
+        _bulletCreator.Create(GetSyncModelData(), _playerCamera.transform.TransformDirection(Vector3.forward));
     }
 
     /// <summary>

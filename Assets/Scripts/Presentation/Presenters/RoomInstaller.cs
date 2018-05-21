@@ -18,6 +18,6 @@ public class RoomInstaller : MonoInstaller {
         Container.Bind<PlayerSynchronizer>().AsSingle();
         Container.Bind<ObjectSynchronizer>().AsSingle();
 
-        //Container.BindIFactory<SyncPlayerData, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab).UnderTransform(_playerParent);
+        Container.BindIFactory<SyncPlayerData, bool, PlayerModel, PlayerModel.PlayerFactory>().FromComponentInNewPrefab(_playerPrefab).UnderTransform(_playerParent);
     }
 }

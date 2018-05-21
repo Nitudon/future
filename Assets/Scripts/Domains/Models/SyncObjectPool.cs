@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AGS.Domains;
 using UnityEngine;
+using UniRx;
 using UniRx.Toolkit;
 
 /// <summary>
@@ -12,7 +13,8 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
     /// <summary>
     /// 識別IDを主キーとしたオブジェクトマップ
     /// </summary>
-    public Dictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects;
+    public IReadOnlyReactiveDictionary<string, SyncObjectModel<SyncObjectData>> SyncObjects => _syncObjects;
+    private ReactiveDictionary<string, SyncObjectModel<SyncObjectData>> _syncObjects;
 
     /// <summary>
     /// 同期オブジェクトの親ルート
@@ -30,7 +32,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
     /// <param name="transform">同期オブジェクトの親ルート</param>
     public SyncObjectPool(Transform transform)
     {
-        SyncObjects = new Dictionary<string, SyncObjectModel<SyncObjectData>>();
+        _syncObjects = new ReactiveDictionary<string, SyncObjectModel<SyncObjectData>>();
         _primitiveObject = new GameObject().AddComponent<SyncObjectModel<SyncObjectData>>();
         _parentTransform = transform;
     }
@@ -57,7 +59,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
         string id = Guid.NewGuid().ToString();
 
         model.SetObjectData(id, owner);
-        SyncObjects.Add(id, model);
+        _syncObjects.Add(id, model);
 
         return model;
     }
@@ -73,7 +75,7 @@ public class SyncObjectPool : ObjectPool<SyncObjectModel<SyncObjectData>> {
         if(SyncObjects.TryGetValue(id, out model))
         {
             Return(model);
-            SyncObjects.Remove(id);
+            _syncObjects.Remove(id);
         }
         else
         {
