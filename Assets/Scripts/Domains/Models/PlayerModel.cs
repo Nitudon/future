@@ -96,6 +96,9 @@ public class PlayerModel : SyncObjectModel<SyncPlayerData>
         _playerHp.Value = data.Hp;
     }
 
+    /// <summary>
+    /// Bullet生成
+    /// </summary>
     public void CreateBullet()
     {
         _bulletCreator.Create(GetSyncModelData(), _playerCamera.transform.TransformDirection(Vector3.forward));
