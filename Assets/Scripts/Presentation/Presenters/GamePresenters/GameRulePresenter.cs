@@ -23,7 +23,7 @@ public class GameRulePresenter : MonoBehaviour
 
     private void Start()
     {
-        SetupGame("Room1");
+        SetupRoom("Room1");
     }
 
     /// <summary>
@@ -31,12 +31,17 @@ public class GameRulePresenter : MonoBehaviour
     /// </summary>
     /// <param name="roomId">サーバー上のルームの識別ID</param>
     /// <returns></returns>
-    public async Task SetupGame(string roomId)
+    public async Task SetupRoom(string roomId)
     {
         // 非同期で依存関係を解決しながら各オブジェクトを初期化
         var room = await RoomWebRequest.JoinRoomAsync();
         _roomModel.Initialize(room);
         await _syncSubject.InitializeAsync();
+    }
+
+    public async Task BootInGame()
+    {
+
     }
 
 }
