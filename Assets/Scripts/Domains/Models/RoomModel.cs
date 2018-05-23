@@ -78,6 +78,12 @@ public class RoomModel : UdonBehaviour{
     public SyncObjectPool SyncObjectPool => _syncObjectPool;
 
     /// <summary>
+    /// ゲーム中かどうかのフラグ
+    /// </summary>
+    private bool _isPlaying = false;
+    public bool IsPlaying => _isPlaying;
+
+    /// <summary>
     /// プレイヤーのDIファクトリー
     /// </summary>
     private PlayerModel.PlayerFactory _playerFactory;
