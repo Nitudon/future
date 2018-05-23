@@ -25,6 +25,11 @@ public class PlayerPresenter : MonoBehaviour, System.IDisposable {
     private GamePlayerUI _gamePlayerUI;
 
     /// <summary>
+    /// タップなどのInput周りのPresenter
+    /// </summary>
+    private PlayerInputPresenter _inputPresenter;
+
+    /// <summary>
     /// 各種バインダーのDisposable
     /// </summary>
     private CompositeDisposable _disposable = new CompositeDisposable();
@@ -34,6 +39,8 @@ public class PlayerPresenter : MonoBehaviour, System.IDisposable {
     /// </summary>
     public void Initialize()
     {
+        // タップで弾の発射
+        _inputPresenter = new PlayerInputPresenter(_gamePlayerModel.CreateBullet);
 
         // 操作対象のプレイヤーに関してのUI処理
         if (_gamePlayerModel.IsMine)
