@@ -161,8 +161,15 @@ public class RoomModel : UdonBehaviour{
     private void ActivateRoom()
     {
         _players = RoomSetting.Players.Select(player => _playerFactory.Create(player, player.PlayerId == RoomSetting.Players.Length - 1)).ToArray();
-        _players.LastOrDefault().StartSyncPosition();
-        _players.ForEach(player => player.SwitchActive(true));
+
+        var myPlayer = _players.FirstOrDefault(player => player.IsMine);
+        myPlayer.StartSyncPosition();
+        _players.ForEach(player =>
+            {
+                player.SwitchActive(true);
+                player.GetComponent<PlayerPresenter>().Initialize();
+            }
+        );
 
         // ゲーム内タイマーの初期化と運用開始
         _gameTimer = ReactiveTimer.ReactiveTimerForSeconds((int)RoomSetting.Time) as IntReactiveProperty;
