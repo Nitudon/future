@@ -10,7 +10,7 @@ using System.Collections;
 public class PlayerModel : SyncObjectModel<SyncPlayerData>
 {
     [Inject]
-    private Camera _playerCamera;
+    private Transform _playerCamera;
 
     [Inject]
     private RoomModel _roomModel;

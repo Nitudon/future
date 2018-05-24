@@ -21,6 +21,12 @@ public class GameRulePresenter : MonoBehaviour
     [Inject]
     private SyncSubject _syncSubject;
 
+    /// <summary>
+    /// ゲームのシステム周りのUI
+    /// </summary>
+    [SerializeField]
+    private SystemUIView _systemUIView;
+
     private void Start()
     {
         SetupRoom("Room1");
@@ -41,7 +47,12 @@ public class GameRulePresenter : MonoBehaviour
 
     public async Task BootInGame()
     {
+        await _systemUIView.GameStartAnimation();
+    }
 
+    public async Task EndGame()
+    {
+        
     }
 
 }
