@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SystemUIView : MonoBehaviour {
 
-    public void SwitchLoadAnimation()
+    public void SwitchLoadAnimation(bool active)
     {
 
     }
