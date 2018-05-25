@@ -20,11 +20,10 @@ namespace AGS.WebRequest
         /// <summary>
         /// ルームデータのフェッチリクエスト
         /// </summary>
-        /// <param name="id">サーバー上のルーム識別ID</param>
         /// <returns>対象となるルームの同期データ</returns>
-        public static async Task<SyncRoomData> FetchSyncRoomDataAsync(string id)
+        public static async Task<SyncRoomData[]> FetchSyncRoomDataAsync()
         {
-            return await HttpRequestAsync.GetRequestAsync<SyncRoomData>($"http://{URL_DOMAIN}/?room_id={id}");
+            return await HttpRequestAsync.GetRequestAsync<SyncRoomData[]>($"http://{URL_DOMAIN}/room/fetchRoom");
         }
 
         /// <summary>

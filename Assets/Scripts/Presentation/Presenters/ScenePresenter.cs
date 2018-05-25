@@ -19,9 +19,10 @@ public class ScenePresenter : SceneManager {
         _progress = await LoadSceneObservable(TITLE_SCENE_NAME);
     }
 
-    public async Task LoadRoomAsync()
+    public async Task LoadRoomAsync(string room)
     {
         _progress = await LoadSceneObservable(ROOM_SCENE_NAME);
+        await FindObjectOfType<GameRulePresenter>().SetupRoom(room);
     }
 
     public async Task LoadGameAsync()

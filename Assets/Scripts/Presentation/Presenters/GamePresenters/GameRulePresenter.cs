@@ -27,11 +27,6 @@ public class GameRulePresenter : MonoBehaviour
     [SerializeField]
     private SystemUIView _systemUIView;
 
-    private void Start()
-    {
-        SetupRoom("Room1");
-    }
-
     /// <summary>
     /// ルームのセットアップ処理
     /// </summary>
