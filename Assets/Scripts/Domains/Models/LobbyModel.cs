@@ -14,9 +14,10 @@ public class LobbyModel : MonoBehaviour {
         _rooomDatas = await RoomWebRequest.FetchSyncRoomDataAsync();
     }
 
-    public void JoinRoom()
+    public async void JoinRoom(int index)
     {
-
+        var joinRoom = _rooomDatas[index];
+        await FindObjectOfType<ScenePresenter>().LoadRoomAsync(joinRoom.Id);
     }
 
 }
